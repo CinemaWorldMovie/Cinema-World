@@ -84,7 +84,7 @@
         .video-bg iframe {
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            pointer-events: none; /* Prevents user interaction with the video */
         }
 
         .hero-overlay {
@@ -93,7 +93,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%);
             z-index: 1;
         }
 
@@ -239,8 +239,10 @@
 <section class="hero-section" id="upcoming">
     <div class="video-bg">
         <iframe 
-            src="https://www.youtube.com/embed/ZgWrFoaisdk" 
-            frameborder="0" allow="autoplay; encrypted-media">
+            src="https://www.youtube.com/embed/ZgWrFoaisdk?autoplay=1&mute=1&loop=1&playlist=ZgWrFoaisdk&controls=0&showinfo=0&rel=0&modestbranding=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
         </iframe>
     </div>
     <div class="hero-overlay"></div>
@@ -278,116 +280,14 @@
                     <p style="color: var(--gold); font-size: 0.9rem; margin: 5px 0;">IMDb: 7.9/10 | BluRay</p>
                     <button class="btn-toggle" onclick="toggle('av1')">VIEW DOWNLOADS</button>
                     <div id="av1" class="details-pane">
-                        <p><strong>Director:</strong> James Cameron, et al.<br>
+                        <p><strong>Director:</strong> James Cameron<br>
                         <strong>Cast:</strong> Sam Worthington, Zoe Saldana<br>
                         <strong>Runtime:</strong> 162 min</p>
-                        <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" target="_blank" class="dl-btn">Download 720p HD</a>
+                        <a href="#" target="_blank" class="dl-btn">Download 720p HD</a>
                     </div>
                 </div>
             </div>
-
-            <div class="movie-card">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2">
-                <div class="movie-body">
-                    <h3 style="margin:0;">The Way of Water (2022)</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Subtitles ]</p>
-                    <button class="btn-toggle" onclick="toggle('av2')">VIEW DOWNLOADS</button>
-                    <div id="av2" class="details-pane">
-                        <p><strong>Director:</strong> James Cameron<br>
-                        <strong>Quality:</strong> BluRay | IMDb: 7.5</p>
-                        <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI" class="dl-btn">Download 720p HD</a>
-                    </div>
-                </div>
             </div>
-
-             <div class="movie-card">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar 3">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Fire and Ash (2025)</h3>
-                    <p style="color: var(--gold); font-weight: bold; margin: 5px 0;">COMING SOON</p>
-                    <button class="btn-toggle" onclick="toggle('av3')">VIEW INFO</button>
-                    <div id="av3" class="details-pane">
-                        <p><strong>Director:</strong> James Cameron<br>
-                        <strong>Status:</strong> Expected 2025<br>
-                        <strong>Subtitle:</strong> Sinhala Subtitles Expected</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-header" id="pirates">Pirates of the Caribbean Collection</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1">
-                <div class="movie-body">
-                    <h3 style="margin:0;">The Curse of the Black Pearl (2003)</h3>
-                    <button class="btn-toggle" onclick="toggle('p1')">VIEW DOWNLOADS</button>
-                    <div id="p1" class="details-pane">
-                        <div style="font-size: 0.8rem; margin-bottom: 10px; color: var(--gold);">IMDb: 7.8/10 | English Audio</div>
-                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn">Download 1080p BluRay</a>
-                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn secondary">Download 720p HD</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-header" id="wimpy">Diary of a Wimpy Kid (Sinhala Dubbed)</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tcWrhZ4Jr7X-UAr7vNKiaL2zkWswXY_eygiI5sV3BaiIAYCW_yTOf3eQu--roi8rcYXAJR6ukrQ6g3P4rnO5WDVvj8nwOjeQmaJs5cvHmJDA0MapQ2wDfaLAJvGNmBw9_NsyCT0R1bbdbjsa7LQSuZ3Qk8gm93e_oCpaEqzIsSov4=w480-h270-p-k-no-nu" alt="Wimpy Kid 1">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Wimpy Kid 1 (2010)</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
-                    <button class="btn-toggle" onclick="toggle('w1')">VIEW DOWNLOADS</button>
-                    <div id="w1" class="details-pane">
-                        <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-%20@sinhalafilmsgo.mp4" class="dl-btn">Download 720p HD</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="movie-card">
-                <img src="" alt="Wimpy Kid 2">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Wimpy Kid 2: Rodrick Rules</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
-                    <button class="btn-toggle" onclick="toggle('w2')">VIEW DOWNLOADS</button>
-                    <div id="w2" class="details-pane">
-                        <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-btn">Download 720p HD</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="movie-card">
-                <img src="https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vM_qP2tj4MSJNH_7wndu7JMAz8XQ1tN80FlQf7tWAzeGjb-Iu8kJTxS0tbQo7AhcRQOQCIR4Rf_QkbVU0Zu-iD6p7Bm3f3d0aSr3iK6ag8rYlaJ-wrXBlbIVeQdb8M48ZzzmzuElZWtKXQZ8AuoYDloo7S4PUU0sss2N1ZMIXQGO7pRaWc5OaD28QJuo8ehIKMrubKxeRvRA=w480-h270-p-k-no-nu" alt="Wimpy Kid 3">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Wimpy Kid 3: Dog Days</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
-                    <button class="btn-toggle" onclick="toggle('w3')">VIEW DOWNLOADS</button>
-                    <div id="w3" class="details-pane">
-                        <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%203:%20Dog%20Days%20(2012)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-btn">Download 720p HD</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-header" id="upcoming-movies">Upcoming Releases 2025</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar Fire and Ash">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Avatar: Fire and Ash (2025)</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Subtitles Expected ]</p>
-                    <button class="btn-toggle" onclick="toggle('up1')">MOVIE DETAILS</button>
-                    <div id="up1" class="details-pane">
-                        <p><strong>Director:</strong> James Cameron, Maria Battle Campbell<br>
-                        <strong>Country:</strong> USA<br>
-                        <strong>Rating:</strong> WEB IMDb: 7.4</p>
-                        <a href="#" class="dl-btn secondary" style="cursor: not-allowed;">Releasing Soon...</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
 </div>
 
@@ -408,4 +308,3 @@
 
 </body>
 </html>
-
