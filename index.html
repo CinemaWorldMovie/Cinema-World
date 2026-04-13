@@ -25,6 +25,31 @@
             overflow-x: hidden;
         }
 
+        /* --- Audio Controls --- */
+        #music-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .music-btn {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .music-btn:hover { transform: scale(1.05); }
+
         /* --- Navigation --- */
         header {
             position: fixed;
@@ -59,7 +84,7 @@
 
         nav a:hover { color: var(--primary-red); }
 
-        /* --- Hero Video Background --- */
+        /* --- Hero Section (Spider-Man Trailer) --- */
         .hero-section {
             position: relative;
             height: 90vh;
@@ -94,7 +119,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%);
+            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
             z-index: 1;
         }
 
@@ -106,6 +131,7 @@
             padding: 20px;
         }
 
+        /* Stylized Spidey Title */
         .hero-content h1 {
             font-size: 5.5rem;
             margin: 0;
@@ -114,9 +140,10 @@
             color: white;
             position: relative;
             text-shadow: 3px 3px 0px var(--primary-red), 6px 6px 0px var(--spidey-blue);
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M15 15 L85 85 M85 15 L15 85' stroke='white' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Ccircle cx='50' cy='50' r='10' stroke='white' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Ccircle cx='50' cy='50' r='25' stroke='white' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Ccircle cx='50' cy='50' r='40' stroke='white' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/svg%3E");
-            background-clip: text;
+            /* Web-like SVG Background pattern inside the text */
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M15 15 L85 85 M85 15 L15 85' stroke='white' stroke-width='0.4' fill='none' opacity='0.4'/%3E%3Ccircle cx='50' cy='50' r='15' stroke='white' stroke-width='0.4' fill='none' opacity='0.4'/%3E%3Ccircle cx='50' cy='50' r='30' stroke='white' stroke-width='0.4' fill='none' opacity='0.4'/%3E%3C/svg%3E");
             -webkit-background-clip: text;
+            background-clip: text;
         }
 
         .badge-upcoming {
@@ -131,7 +158,7 @@
             letter-spacing: 2px;
         }
 
-        /* --- Layout --- */
+        /* --- Grid & Cards --- */
         .main-container {
             display: grid;
             grid-template-columns: 260px 1fr;
@@ -182,7 +209,7 @@
         }
 
         .movie-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
-        .movie-card img { width: 100%; height: 220px; object-fit: cover; background: #222; }
+        .movie-card img { width: 100%; height: 400px; object-fit: cover; background: #222; }
         .movie-body { padding: 15px; text-align: center; }
 
         .btn-toggle {
@@ -198,8 +225,7 @@
         }
 
         .details-pane { display: none; padding-top: 15px; text-align: left; }
-        .details-pane p { font-size: 0.85rem; color: #999; line-height: 1.4; }
-
+        
         .dl-btn {
             background: var(--primary-red);
             color: white;
@@ -211,8 +237,6 @@
             text-align: center;
             margin-top: 10px;
         }
-
-        .dl-btn.secondary { background: #444; }
 
         footer {
             background: #141414;
@@ -230,6 +254,18 @@
     </style>
 </head>
 <body>
+
+<div id="music-container">
+    <button class="music-btn" id="playToggle" onclick="toggleMusic()">
+        <span>🎵 Enable Background Music</span>
+    </button>
+    <div style="display:none">
+        <iframe id="bgAudio" width="0" height="0" 
+            src="https://www.youtube.com/embed/5waetzP_Fps?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=5waetzP_Fps" 
+            frameborder="0" allow="autoplay">
+        </iframe>
+    </div>
+</div>
 
 <header>
     <a href="#" class="logo">CINEMA WORLD</a>
@@ -250,13 +286,12 @@
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <span class="badge-upcoming">WORLD PREMIERE | OFFICIAL TRAILER</span>
+        <span class="badge-upcoming">COMING SOON | OFFICIAL TRAILER</span>
         <h1>Spider-Man: Brand New Day</h1>
         <p style="font-size: 1.3rem; color: #eee; margin-top: 15px; line-height: 1.6;">
-            The world has forgotten who Peter Parker is. Now, stripped of his past and his allies, 
-            he must face a new era of villains in a rebirth that changes everything.
+            A new era begins. Stripped of his past, Peter Parker must navigate a world that doesn't know him, while facing a threat that could end everything.
         </p>
-        <p style="color: var(--gold); font-weight: bold; letter-spacing: 1px;">[ 4K UHD | Sinhala Subtitles Expected ]</p>
+        <p style="color: var(--gold); font-weight: bold;">[ 4K UHD | Sinhala Subtitles Expected ]</p>
     </div>
 </section>
 
@@ -264,8 +299,8 @@
     <aside class="sidebar">
         <h3>Categories</h3>
         <ul class="cat-list">
-            <li><a href="#pirates">Action Adventure</a></li>
-            <li><a href="#avatar">Avatar Collection</a></li>
+            <li><a href="#pirates">Pirates Collection</a></li>
+            <li><a href="#avatar">Avatar Movies</a></li>
             <li><a href="#wimpy">Sinhala Dubbed</a></li>
             <li><a href="#upcoming-movies">Upcoming 2026</a></li>
         </ul>
@@ -321,7 +356,7 @@
         <h2 class="section-header" id="wimpy">Diary of a Wimpy Kid (Sinhala Dubbed)</h2>
         <div class="movie-grid">
             <div class="movie-card">
-                <img src="https://m.media-amazon.com/images/M/MV5BMTY3NjE1NTE4NF5BMl5BanBnXkFtZTcwOTUyODI5Mw@@._V1_.jpg" alt="Wimpy Kid 1">
+                <img src="https://image.tmdb.org/t/p/w500/mXpSAn8HscM60OasvC7q5654C4h.jpg" alt="Wimpy Kid 1">
                 <div class="movie-body">
                     <h3 style="margin:0;">Wimpy Kid 1 (2010)</h3>
                     <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
@@ -332,7 +367,7 @@
                 </div>
             </div>
             <div class="movie-card">
-                <img src="https://m.media-amazon.com/images/M/MV5BMTQ2NDM4MDI0Ml5BMl5BanBnXkFtZTcwMjA3OTc5NA@@._V1_.jpg" alt="Wimpy Kid 2">
+                <img src="https://image.tmdb.org/t/p/w500/fDAs3Y1t2W31lP4z7N6zXgY66R5.jpg" alt="Wimpy Kid 2">
                 <div class="movie-body">
                     <h3 style="margin:0;">Wimpy Kid 2: Rodrick Rules</h3>
                     <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
@@ -343,7 +378,7 @@
                 </div>
             </div>
             <div class="movie-card">
-                <img src="https://m.media-amazon.com/images/M/MV5BMjA0MjY2MDUwN15BMl5BanBnXkFtZTcwNTg5MzY1OA@@._V1_.jpg" alt="Wimpy Kid 3">
+                <img src="https://image.tmdb.org/t/p/w500/98vE3qK23fI4M9y0VOfG7e2Z8uU.jpg" alt="Wimpy Kid 3">
                 <div class="movie-body">
                     <h3 style="margin:0;">Wimpy Kid 3: Dog Days</h3>
                     <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
@@ -354,36 +389,48 @@
                 </div>
             </div>
         </div>
-
-        <h2 class="section-header" id="upcoming-movies">Upcoming Blockbusters</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://i.ytimg.com/vi/8TZMtslA3UY/maxresdefault.jpg" alt="Spider-Man">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Spider-Man: Brand New Day</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Coming 2026 ]</p>
-                    <button class="btn-toggle" onclick="toggle('up1')">MOVIE DETAILS</button>
-                    <div id="up1" class="details-pane">
-                        <p><strong>Release:</strong> Summer 2026<br><strong>Status:</strong> In Production</p>
-                        <a href="#" class="dl-btn secondary" style="cursor: not-allowed;">Releasing Soon...</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 </div>
 
 <footer>
-    <p>© 2026 CINEMA WORLD | Your Premium Destination for High Quality Movies</p>
+    <p>© 2026 CINEMA WORLD | High Quality Sinhala Dubbed & Subtitled Movies</p>
 </footer>
 
 <script>
     function toggle(id) {
         var x = document.getElementById(id);
-        if (x.style.display === "block") {
-            x.style.display = "none";
+        x.style.display = (x.style.display === "block") ? "none" : "block";
+    }
+
+    // Music Player Management
+    var isMuted = true;
+    var player;
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('bgAudio', {
+            events: { 'onReady': onPlayerReady }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    function toggleMusic() {
+        if (isMuted) {
+            player.unMute();
+            player.setVolume(40);
+            document.getElementById('playToggle').innerHTML = "<span>⏸ Pause Music</span>";
+            isMuted = false;
         } else {
-            x.style.display = "block";
+            player.mute();
+            document.getElementById('playToggle').innerHTML = "<span>🎵 Play Background Music</span>";
+            isMuted = true;
         }
     }
 </script>
