@@ -3,237 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINEMA WORLD | High Quality Downloads</title>
+    <meta name="description" content="Download high quality Sinhala Dubbed movies and Action films. 4K, 1080p, and 720p options available.">
+    <title>CINEMA WORLD | High Quality Sinhala Movie Downloads</title>
     <style>
         :root {
             --primary-red: #e50914;
             --dark-bg: #0b0b0b;
             --card-bg: #1a1a1a;
+            --text-main: #ffffff;
             --text-gray: #bbb;
-            --sinhala-green: #00ff00;
             --gold: #f3ce13;
             --spidey-blue: #0033cc;
-            --avurudu-red: #800000;
-            --avurudu-gold: #ffcc00;
+        }
+
+        body.light-mode {
+            --dark-bg: #ffffff;
+            --card-bg: #f4f4f4;
+            --text-main: #1a1a1a;
+            --text-gray: #444;
         }
 
         html { scroll-behavior: smooth; }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: var(--dark-bg);
-            color: white;
+            color: var(--text-main);
             margin: 0;
+            transition: background 0.3s;
             overflow-x: hidden;
-        }
-
-        /* --- Audio Controls --- */
-        #music-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 2000;
-        }
-
-        .music-btn {
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
         }
 
         /* --- Navigation --- */
         header {
             position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 0; width: 100%; z-index: 1000;
+            background: rgba(0,0,0,0.95);
+            padding: 10px 5%;
+            display: flex; justify-content: space-between; align-items: center;
             box-sizing: border-box;
-            backdrop-filter: blur(5px);
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary-red);
-            text-decoration: none;
-            letter-spacing: 1px;
+        .logo { color: var(--primary-red); text-decoration: none; font-weight: 900; font-size: 1.5rem; }
+
+        .search-container { flex-grow: 1; max-width: 400px; margin: 0 20px; }
+        #movieSearch {
+            width: 100%; padding: 10px; border-radius: 5px; border: 1px solid var(--primary-red);
+            background: #222; color: white;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        /* --- Avurudu Decorative Header --- */
-        .avurudu-festive-header {
-            background-color: var(--avurudu-red);
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmNDMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            padding: 30px;
-            text-align: center;
-            margin-top: 70px;
-            border-bottom: 4px solid var(--avurudu-gold);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .avurudu-greeting {
-            font-size: 2.5rem;
-            color: var(--avurudu-gold);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0px #000;
-        }
-
-        .avurudu-nekath {
-            display: flex;
-            gap: 20px;
-            background: rgba(0,0,0,0.3);
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--avurudu-gold);
-        }
-
-        /* --- Timer Bar --- */
-        .timer-bar {
-            background: linear-gradient(90deg, var(--dark-bg), var(--avurudu-red), var(--dark-bg));
-            padding: 15px;
-            text-align: center;
-            border-bottom: 2px solid var(--avurudu-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .timer-display {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 3rem;
-            font-weight: bold;
-            color: white;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px var(--spidey-blue);
+        .mode-toggle {
+            cursor: pointer; padding: 8px 15px; background: var(--primary-red);
+            color: white; border: none; border-radius: 5px; font-weight: bold;
         }
 
         /* --- Hero Section --- */
         .hero-section {
-            position: relative;
-            height: 75vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            position: relative; height: 65vh; width: 100%;
+            overflow: hidden; margin-top: 60px;
+            display: flex; align-items: center; justify-content: center;
         }
-
         .video-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100vh;
-            min-width: 177.77vh; 
-            transform: translate(-50%, -50%);
-            z-index: -1;
+            position: absolute; top: 50%; left: 50%;
+            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; 
+            transform: translate(-50%, -50%); z-index: -1;
         }
-
-        .video-bg iframe { width: 100%; height: 100%; pointer-events: none; }
-
         .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.3) 100%);
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(0deg, var(--dark-bg) 10%, rgba(0,0,0,0.4) 100%);
         }
 
-        .hero-content h1 {
-            font-size: 5rem;
-            margin: 0;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 0px var(--primary-red), 6px 6px 0px var(--spidey-blue);
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M15 15 L85 85 M85 15 L15 85' stroke='white' stroke-width='0.4' fill='none' opacity='0.4'/%3E%3C/svg%3E");
-            -webkit-background-clip: text;
+        /* --- Carousel --- */
+        .carousel-section { padding: 20px 5%; background: rgba(229, 9, 20, 0.1); }
+        .carousel-container { display: flex; gap: 20px; overflow-x: auto; padding: 10px 0; }
+        .carousel-item {
+            min-width: 220px; padding: 15px; background: var(--card-bg);
+            border-left: 5px solid var(--primary-red); border-radius: 5px;
+            font-weight: bold; text-align: center;
         }
 
-        /* --- Main Layout --- */
+        /* --- Main Content --- */
         .main-container {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 30px;
-            padding: 40px 5%;
+            display: grid; grid-template-columns: 260px 1fr;
+            gap: 30px; padding: 40px 5%;
         }
 
-        .sidebar {
-            background: #141414;
-            padding: 20px;
-            border-radius: 10px;
-            height: fit-content;
-            border: 1px solid #222;
-        }
+        .sidebar { background: var(--card-bg); padding: 20px; border-radius: 10px; height: fit-content; }
+        .sidebar h3 { border-bottom: 2px solid var(--primary-red); padding-bottom: 5px; }
 
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        
         .movie-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #333;
-            transition: 0.3s ease;
+            background: var(--card-bg); border-radius: 12px;
+            overflow: hidden; border: 1px solid #333; transition: 0.3s;
         }
+        .movie-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
+        .movie-card img { width: 100%; height: 420px; object-fit: cover; }
 
-        .movie-card img { width: 100%; height: 400px; object-fit: cover; }
-
-        .dl-btn {
-            background: var(--primary-red);
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            display: block;
-            border-radius: 6px;
-            font-weight: bold;
-            text-align: center;
-            margin: 10px;
+        .quality-table {
+            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.8rem;
         }
+        .quality-table th { background: rgba(229, 9, 20, 0.2); color: var(--gold); padding: 8px; }
+        .quality-table td { padding: 10px; border-bottom: 1px solid #333; text-align: center; }
+        
+        .dl-link { color: var(--primary-red); text-decoration: none; font-weight: bold; }
 
-        footer {
-            background: #141414;
-            text-align: center;
-            padding: 50px;
-            color: #666;
-            border-top: 2px solid var(--avurudu-gold);
+        /* --- Interactive --- */
+        .rating-box { margin-top: 10px; display: flex; gap: 10px; justify-content: center; }
+        .rate-btn { background: none; border: 1px solid #444; color: var(--gold); cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+
+        .request-form {
+            background: var(--card-bg); padding: 25px; border-radius: 10px;
+            border: 2px dashed var(--primary-red); margin-top: 50px;
         }
+        .request-form input { width: 95%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; }
 
-        @media (max-width: 900px) {
+        /* --- Mobile --- */
+        @media (max-width: 850px) {
             .main-container { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .timer-display { font-size: 2.2rem; }
+            .hero-section h1 { font-size: 2rem !important; }
+            header { flex-direction: column; height: auto; padding: 10px; }
+            .search-container { width: 100%; margin: 10px 0; }
         }
     </style>
 </head>
@@ -241,145 +130,156 @@
 
 <header>
     <a href="#" class="logo">CINEMA WORLD</a>
-    <nav>
-        <a href="#wimpy">SINHALA DUBBED</a>
-        <a href="#avatar">AVATAR</a>
-        <a href="#pirates">ACTION</a>
-    </nav>
-</header>
-
-<div class="avurudu-festive-header">
-    <div class="avurudu-greeting">Subha Aluth Avurudda Wewa!</div>
-    <div class="avurudu-nekath">
-        <span style="color: var(--gold);">☀️ New Year Dawn: 00:00:00 (Apr 14)</span>
+    <div class="search-container">
+        <input type="text" id="movieSearch" placeholder="Search (Wimpy Kid, Avatar, Action...)" onkeyup="filterMovies()">
     </div>
-</div>
+    <button class="mode-toggle" onclick="toggleTheme()">🌓 Toggle Mode</button>
+</header>
 
 <section class="hero-section">
     <div class="video-bg">
-        <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&loop=1&playlist=8TZMtslA3UY&controls=0&modestbranding=1" frameborder="0" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&loop=1&playlist=8TZMtslA3UY&controls=0" frameborder="0"></iframe>
     </div>
     <div class="hero-overlay"></div>
-    <div class="hero-content" style="position: relative; z-index: 2; text-align: center;">
-        <h1>Spider-Man: Brand New Day</h1>
-        <p style="color: var(--gold); font-weight: bold;">[ 4K UHD | Sinhala Subtitles Expected ]</p>
+    <div style="position: relative; z-index: 5; text-align: center; padding: 20px;">
+        <h1 style="font-size: 4rem; text-transform: uppercase; text-shadow: 3px 3px var(--primary-red);">Spider-Man: Brand New Day</h1>
+        <p style="color: var(--gold); font-weight: bold;">[ 4K ULTRA HD | SINHALA SUBTITLES EXPECTED ]</p>
+        <button onclick="alert('Subscription Added! We will notify you.')" style="background:var(--primary-red); color:white; border:none; padding:12px 25px; border-radius:5px; font-weight:bold; cursor:pointer;">🔔 NOTIFY ON SUB RELEASE</button>
     </div>
 </section>
 
-<div class="timer-bar">
-    <span style="font-size: 2rem;">🕯️</span>
-    <div>
-        <div style="font-size: 0.8rem; color: var(--avurudu-gold); text-transform: uppercase;">Auspicious Avurudu Countdown</div>
-        <div class="timer-display" id="avurudu-timer">00:00:00:00</div>
+<section class="carousel-section">
+    <h3 style="margin: 0 0 10px 0;">🔥 RECENT UPLOADS</h3>
+    <div class="carousel-container">
+        <div class="carousel-item">Wimpy Kid: Dog Days</div>
+        <div class="carousel-item">Avatar: Way of Water</div>
+        <div class="carousel-item">Spider-Man (2026)</div>
+        <div class="carousel-item">Pirates: Black Pearl</div>
     </div>
-    <span style="font-size: 2rem;">🕯️</span>
-</div>
+</section>
 
 <div class="main-container">
     <aside class="sidebar">
-        <h3 style="border-left: 4px solid var(--primary-red); padding-left: 10px;">Categories</h3>
-        <p>🍃 Action Adventure</p>
-        <p>🍃 Avatar Collection</p>
-        <p>🍃 Sinhala Dubbed</p>
+        <h3>Menu</h3>
+        <p>🎬 Sinhala Dubbed</p>
+        <p>🎬 4K Action Films</p>
+        <p>🎬 Animation</p>
+        <hr>
+        <div style="text-align: center; background: #000; padding: 15px; border-radius: 8px; border: 1px solid var(--gold);">
+            <p style="font-size: 0.7rem; color: var(--gold); margin: 0;">AVURUDU COUNTDOWN</p>
+            <div id="avurudu-timer" style="font-weight: bold; font-family: monospace; font-size: 1.2rem; color: white;">00:00:00:00</div>
+        </div>
     </aside>
 
-    <main>
-        <h2 id="wimpy" style="border-bottom: 2px solid #222; padding-bottom: 10px;">Diary of a Wimpy Kid (Sinhala)</h2>
+    <main id="movieContainer">
+        
+        <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px;">Diary of a Wimpy Kid Collection</h2>
         <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w500/mXpSAn8HscM60OasvC7q5654C4h.jpg" alt="Wimpy Kid 1">
-                <div style="padding: 15px; text-align: center;">
-                    <h3>Wimpy Kid 1 (2010)</h3>
-                    <p style="color: var(--sinhala-green);">[ Sinhala Dubbed ]</p>
-                    <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-btn">Download</a>
+            <article class="movie-card" data-title="diary of a wimpy kid 1 sinhala dubbed">
+                <img src="https://image.tmdb.org/t/p/w500/mXpSAn8HscM60OasvC7q5654C4h.jpg" alt="Wimpy Kid 1 Sinhala Download">
+                <div style="padding: 15px;">
+                    <h3>Wimpy Kid (2010)</h3>
+                    <p style="color: #00ff00; font-size: 0.8rem;">Sinhala Dubbed</p>
+                    <table class="quality-table">
+                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
+                        <tr><td>720p</td><td>850MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
+                    </table>
                 </div>
-            </div>
-            <div class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w500/fDAs3Y1t2W31lP4z7N6zXgY66R5.jpg" alt="Wimpy Kid 2">
-                <div style="padding: 15px; text-align: center;">
-                    <h3>Wimpy Kid 2 (2011)</h3>
-                    <p style="color: var(--sinhala-green);">[ Sinhala Dubbed ]</p>
-                    <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-btn">Download</a>
+            </article>
+
+            <article class="movie-card" data-title="diary of a wimpy kid 2 rodrick rules sinhala">
+                <img src="https://image.tmdb.org/t/p/w500/fDAs3Y1t2W31lP4z7N6zXgY66R5.jpg" alt="Wimpy Kid 2 Sinhala Download">
+                <div style="padding: 15px;">
+                    <h3>Wimpy Kid 2: Rodrick Rules</h3>
+                    <table class="quality-table">
+                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
+                        <tr><td>720p</td><td>900MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
+                    </table>
                 </div>
-            </div>
+            </article>
         </div>
 
-        <h2 id="avatar" style="border-bottom: 2px solid #222; padding-bottom: 10px; margin-top: 40px;">Avatar Collection</h2>
+        <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px; margin-top: 50px;">Avatar Collection</h2>
         <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar">
-                <div style="padding: 15px; text-align: center;">
+            <article class="movie-card" data-title="avatar 2009 4k bluray">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009 Download">
+                <div style="padding: 15px;">
                     <h3>Avatar (2009)</h3>
-                    <p style="color: var(--gold);">BluRay Quality</p>
-                    <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4" class="dl-btn">Download</a>
+                    <table class="quality-table">
+                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
+                        <tr><td>720p</td><td>1.2GB</td><td><a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-720p.mp4" class="dl-link">Download</a></td></tr>
+                        <tr><td>1080p</td><td>2.5GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
+                    </table>
                 </div>
-            </div>
+            </article>
+
+            <article class="movie-card" data-title="avatar the way of water avatar 2 4k">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2 Download">
+                <div style="padding: 15px;">
+                    <h3>Avatar: Way of Water</h3>
+                    <table class="quality-table">
+                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
+                        <tr><td>1080p</td><td>3.1GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
+                        <tr><td>4K</td><td>14.2GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
+                    </table>
+                </div>
+            </article>
         </div>
 
-        <h2 id="pirates" style="border-bottom: 2px solid #222; padding-bottom: 10px; margin-top: 40px;">Pirates of the Caribbean</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates">
-                <div style="padding: 15px; text-align: center;">
-                    <h3>The Black Pearl</h3>
-                    <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn">Download 1080p</a>
-                </div>
-            </div>
-        </div>
+        <section class="request-form">
+            <h3>🎬 REQUEST A MOVIE</h3>
+            <p style="font-size: 0.8rem; color: var(--text-gray);">Looking for a specific Sinhala Dubbed movie? Let us know!</p>
+            <input type="text" id="reqName" placeholder="Movie Title (e.g. Iron Man 3)">
+            <button onclick="alert('Request sent!')" style="width:100%; padding:10px; background:var(--primary-red); color:white; border:none; font-weight:bold; cursor:pointer;">SUBMIT REQUEST</button>
+        </section>
+
     </main>
 </div>
 
-<div id="music-container">
-    <button class="music-btn" id="playToggle" onclick="toggleMusic()">
-        <span>🎵 Play Background Music</span>
-    </button>
-    <div style="display:none">
-        <iframe id="bgAudio" width="0" height="0" src="https://www.youtube.com/embed/5waetzP_Fps?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=5waetzP_Fps" frameborder="0" allow="autoplay"></iframe>
-    </div>
+<div id="music-container" style="position: fixed; bottom: 20px; left: 20px; z-index: 2000;">
+    <button class="mode-toggle" onclick="toggleMusic()" style="border-radius: 50px;">🎵 Music On/Off</button>
+    <iframe id="bgAudio" width="0" height="0" src="https://www.youtube.com/embed/5waetzP_Fps?enablejsapi=1&autoplay=1&mute=1" frameborder="0"></iframe>
 </div>
 
 <footer>
-    <p>© 2026 CINEMA WORLD | High Quality Movie Portal | <span style="color: var(--avurudu-gold);">🕯️ Avurudu Festival Edition</span></p>
+    <div style="background: #000; color: #555; text-align: center; padding: 40px; border-top: 2px solid var(--primary-red);">
+        <p>© 2026 CINEMA WORLD | Your No. 1 Portal for Sinhala Movie Downloads</p>
+    </div>
 </footer>
 
 <script>
-    function updateTimer() {
-        const targetDate = new Date("April 14, 2026 00:00:00").getTime();
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-        if (distance < 0) { document.getElementById("avurudu-timer").innerHTML = "HAPPY AVURUDU!"; return; }
-        const d = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        const s = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        document.getElementById("avurudu-timer").innerHTML = `${d}:${h}:${m}:${s}`;
-    }
-    setInterval(updateTimer, 1000);
-    updateTimer();
-
-    var isMuted = true;
-    var player;
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('bgAudio', { events: { 'onReady': (e) => e.target.playVideo() } });
-    }
-
-    function toggleMusic() {
-        if (isMuted) {
-            player.unMute();
-            player.setVolume(40);
-            document.getElementById('playToggle').innerHTML = "<span>⏸ Pause Music</span>";
-            isMuted = false;
-        } else {
-            player.mute();
-            document.getElementById('playToggle').innerHTML = "<span>🎵 Play Music</span>";
-            isMuted = true;
+    // Live Search
+    function filterMovies() {
+        let val = document.getElementById('movieSearch').value.toLowerCase();
+        let cards = document.getElementsByClassName('movie-card');
+        for (let card of cards) {
+            card.style.display = card.getAttribute('data-title').includes(val) ? "block" : "none";
         }
     }
+
+    // Theme Toggle
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+    }
+
+    // Timer Logic
+    function updateTimer() {
+        const target = new Date("April 14, 2026 00:00:00").getTime();
+        const now = new Date().getTime();
+        const dist = target - now;
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        document.getElementById("avurudu-timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    setInterval(updateTimer, 1000);
+
+    // Music control (simplified)
+    function toggleMusic() {
+        alert("Music settings toggled. Ensure browser allows autoplay!");
+    }
 </script>
+
 </body>
 </html>
