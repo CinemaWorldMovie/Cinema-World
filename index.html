@@ -56,7 +56,7 @@
             color: white; border: none; border-radius: 5px; font-weight: bold;
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section (Fixed Trailer) --- */
         .hero-section {
             position: relative; height: 65vh; width: 100%;
             overflow: hidden; margin-top: 60px;
@@ -67,12 +67,15 @@
             width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; 
             transform: translate(-50%, -50%); z-index: -1;
         }
+        .video-bg iframe {
+            width: 100%; height: 100%; pointer-events: none;
+        }
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(0deg, var(--dark-bg) 10%, rgba(0,0,0,0.4) 100%);
         }
 
-        /* --- Carousel --- */
+        /* --- New Arrivals Carousel --- */
         .carousel-section { padding: 20px 5%; background: rgba(229, 9, 20, 0.1); }
         .carousel-container { display: flex; gap: 20px; overflow-x: auto; padding: 10px 0; }
         .carousel-item {
@@ -81,7 +84,7 @@
             font-weight: bold; text-align: center;
         }
 
-        /* --- Main Content --- */
+        /* --- Main Content Layout --- */
         .main-container {
             display: grid; grid-template-columns: 260px 1fr;
             gap: 30px; padding: 40px 5%;
@@ -107,17 +110,14 @@
         
         .dl-link { color: var(--primary-red); text-decoration: none; font-weight: bold; }
 
-        /* --- Interactive --- */
-        .rating-box { margin-top: 10px; display: flex; gap: 10px; justify-content: center; }
-        .rate-btn { background: none; border: 1px solid #444; color: var(--gold); cursor: pointer; padding: 5px 10px; border-radius: 5px; }
-
+        /* --- Request Form --- */
         .request-form {
             background: var(--card-bg); padding: 25px; border-radius: 10px;
             border: 2px dashed var(--primary-red); margin-top: 50px;
         }
-        .request-form input { width: 95%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; }
+        .request-form input { width: 95%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; }
 
-        /* --- Mobile --- */
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 850px) {
             .main-container { grid-template-columns: 1fr; }
             .hero-section h1 { font-size: 2rem !important; }
@@ -133,12 +133,16 @@
     <div class="search-container">
         <input type="text" id="movieSearch" placeholder="Search (Wimpy Kid, Avatar, Action...)" onkeyup="filterMovies()">
     </div>
-    <button class="mode-toggle" onclick="toggleTheme()">🌓 Toggle Mode</button>
+    <button class="mode-toggle" onclick="toggleTheme()">🌓 Theme Mode</button>
 </header>
 
 <section class="hero-section">
     <div class="video-bg">
-        <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&loop=1&playlist=8TZMtslA3UY&controls=0" frameborder="0"></iframe>
+        <iframe 
+            src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&loop=1&playlist=8TZMtslA3UY&controls=0&showinfo=0&rel=0&modestbranding=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media">
+        </iframe>
     </div>
     <div class="hero-overlay"></div>
     <div style="position: relative; z-index: 5; text-align: center; padding: 20px;">
@@ -149,9 +153,9 @@
 </section>
 
 <section class="carousel-section">
-    <h3 style="margin: 0 0 10px 0;">🔥 RECENT UPLOADS</h3>
+    <h3 style="margin: 0 0 10px 0;">🔥 NEW ARRIVALS</h3>
     <div class="carousel-container">
-        <div class="carousel-item">Wimpy Kid: Dog Days</div>
+        <div class="carousel-item">Wimpy Kid Collection</div>
         <div class="carousel-item">Avatar: Way of Water</div>
         <div class="carousel-item">Spider-Man (2026)</div>
         <div class="carousel-item">Pirates: Black Pearl</div>
@@ -160,10 +164,10 @@
 
 <div class="main-container">
     <aside class="sidebar">
-        <h3>Menu</h3>
+        <h3>Categories</h3>
         <p>🎬 Sinhala Dubbed</p>
         <p>🎬 4K Action Films</p>
-        <p>🎬 Animation</p>
+        <p>🎬 Kids & Animation</p>
         <hr>
         <div style="text-align: center; background: #000; padding: 15px; border-radius: 8px; border: 1px solid var(--gold);">
             <p style="font-size: 0.7rem; color: var(--gold); margin: 0;">AVURUDU COUNTDOWN</p>
@@ -179,10 +183,10 @@
                 <img src="https://image.tmdb.org/t/p/w500/mXpSAn8HscM60OasvC7q5654C4h.jpg" alt="Wimpy Kid 1 Sinhala Download">
                 <div style="padding: 15px;">
                     <h3>Wimpy Kid (2010)</h3>
-                    <p style="color: #00ff00; font-size: 0.8rem;">Sinhala Dubbed</p>
+                    <p style="color: #00ff00; font-size: 0.8rem;">[ Sinhala Dubbed ]</p>
                     <table class="quality-table">
                         <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p</td><td>850MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
+                        <tr><td>720p HD</td><td>850MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
                     </table>
                 </div>
             </article>
@@ -191,9 +195,22 @@
                 <img src="https://image.tmdb.org/t/p/w500/fDAs3Y1t2W31lP4z7N6zXgY66R5.jpg" alt="Wimpy Kid 2 Sinhala Download">
                 <div style="padding: 15px;">
                     <h3>Wimpy Kid 2: Rodrick Rules</h3>
+                    <p style="color: #00ff00; font-size: 0.8rem;">[ Sinhala Dubbed ]</p>
                     <table class="quality-table">
                         <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p</td><td>900MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
+                        <tr><td>720p HD</td><td>910MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
+                    </table>
+                </div>
+            </article>
+
+            <article class="movie-card" data-title="diary of a wimpy kid 3 dog days sinhala">
+                <img src="https://image.tmdb.org/t/p/w500/98vE3qK23fI4M9y0VOfG7e2Z8uU.jpg" alt="Wimpy Kid 3 Sinhala Download">
+                <div style="padding: 15px;">
+                    <h3>Wimpy Kid 3: Dog Days</h3>
+                    <p style="color: #00ff00; font-size: 0.8rem;">[ Sinhala Dubbed ]</p>
+                    <table class="quality-table">
+                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
+                        <tr><td>720p HD</td><td>880MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%203:%20Dog%20Days%20(2012)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
                     </table>
                 </div>
             </article>
@@ -201,14 +218,14 @@
 
         <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px; margin-top: 50px;">Avatar Collection</h2>
         <div class="movie-grid">
-            <article class="movie-card" data-title="avatar 2009 4k bluray">
+            <article class="movie-card" data-title="avatar 2009 bluray">
                 <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009 Download">
                 <div style="padding: 15px;">
                     <h3>Avatar (2009)</h3>
                     <table class="quality-table">
                         <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p</td><td>1.2GB</td><td><a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-720p.mp4" class="dl-link">Download</a></td></tr>
-                        <tr><td>1080p</td><td>2.5GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
+                        <tr><td>720p BR</td><td>1.2GB</td><td><a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-720p.mp4" class="dl-link">Download</a></td></tr>
+                        <tr><td>1080p BR</td><td>2.8GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
                     </table>
                 </div>
             </article>
@@ -220,7 +237,21 @@
                     <table class="quality-table">
                         <tr><th>Res</th><th>Size</th><th>Link</th></tr>
                         <tr><td>1080p</td><td>3.1GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
-                        <tr><td>4K</td><td>14.2GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
+                        <tr><td>4K UHD</td><td>14.2GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
+                    </table>
+                </div>
+            </article>
+        </div>
+
+        <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px; margin-top: 50px;">Action Specials</h2>
+        <div class="movie-grid">
+            <article class="movie-card" data-title="pirates of the caribbean black pearl">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1 Download">
+                <div style="padding: 15px;">
+                    <h3>Pirates: Black Pearl</h3>
+                    <table class="quality-table">
+                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
+                        <tr><td>1080p</td><td>2.1GB</td><td><a href="https://pixeldrain.com/u/AyChGtcW" class="dl-link">Download</a></td></tr>
                     </table>
                 </div>
             </article>
@@ -228,56 +259,62 @@
 
         <section class="request-form">
             <h3>🎬 REQUEST A MOVIE</h3>
-            <p style="font-size: 0.8rem; color: var(--text-gray);">Looking for a specific Sinhala Dubbed movie? Let us know!</p>
-            <input type="text" id="reqName" placeholder="Movie Title (e.g. Iron Man 3)">
-            <button onclick="alert('Request sent!')" style="width:100%; padding:10px; background:var(--primary-red); color:white; border:none; font-weight:bold; cursor:pointer;">SUBMIT REQUEST</button>
+            <p style="font-size: 0.8rem; color: var(--text-gray);">Can't find a movie? Send us a request and we will add it.</p>
+            <input type="text" id="reqName" placeholder="Movie Title...">
+            <button onclick="alert('Request sent successfully!')" style="width:100%; padding:10px; background:var(--primary-red); color:white; border:none; font-weight:bold; cursor:pointer; border-radius:5px;">SUBMIT REQUEST</button>
         </section>
 
     </main>
 </div>
 
 <div id="music-container" style="position: fixed; bottom: 20px; left: 20px; z-index: 2000;">
-    <button class="mode-toggle" onclick="toggleMusic()" style="border-radius: 50px;">🎵 Music On/Off</button>
+    <button class="mode-toggle" onclick="toggleMusic()" style="border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">🎵 Music Player</button>
     <iframe id="bgAudio" width="0" height="0" src="https://www.youtube.com/embed/5waetzP_Fps?enablejsapi=1&autoplay=1&mute=1" frameborder="0"></iframe>
 </div>
 
 <footer>
     <div style="background: #000; color: #555; text-align: center; padding: 40px; border-top: 2px solid var(--primary-red);">
-        <p>© 2026 CINEMA WORLD | Your No. 1 Portal for Sinhala Movie Downloads</p>
+        <p>© 2026 CINEMA WORLD | High Quality Portal | <span style="color:var(--gold);">Sri Lanka Avurudu Edition</span></p>
     </div>
 </footer>
 
 <script>
-    // Live Search
+    // 1. Live Search Logic
     function filterMovies() {
         let val = document.getElementById('movieSearch').value.toLowerCase();
         let cards = document.getElementsByClassName('movie-card');
         for (let card of cards) {
-            card.style.display = card.getAttribute('data-title').includes(val) ? "block" : "none";
+            let title = card.getAttribute('data-title');
+            card.style.display = title.includes(val) ? "block" : "none";
         }
     }
 
-    // Theme Toggle
+    // 2. Dark/Light Theme Toggle
     function toggleTheme() {
         document.body.classList.toggle('light-mode');
     }
 
-    // Timer Logic
+    // 3. Avurudu Countdown Timer
     function updateTimer() {
         const target = new Date("April 14, 2026 00:00:00").getTime();
         const now = new Date().getTime();
         const dist = target - now;
-        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((dist % (1000 * 60)) / 1000);
-        document.getElementById("avurudu-timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+        if (dist < 0) {
+            document.getElementById("avurudu-timer").innerHTML = "HAPPY NEW YEAR!";
+            return;
+        }
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        const s = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        document.getElementById("avurudu-timer").innerHTML = `${d}:${h}:${m}:${s}`;
     }
     setInterval(updateTimer, 1000);
+    updateTimer();
 
-    // Music control (simplified)
+    // 4. Music Logic
     function toggleMusic() {
-        alert("Music settings toggled. Ensure browser allows autoplay!");
+        alert("Music control triggered! Please check your browser's autoplay permissions to hear the audio.");
     }
 </script>
 
