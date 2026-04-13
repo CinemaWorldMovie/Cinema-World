@@ -24,6 +24,57 @@
             overflow-x: hidden;
         }
 
+        /* --- Netflix Style Splash Intro --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .intro-logo {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            letter-spacing: 15px;
+            opacity: 0;
+            animation: netflix-intro 2.5s forwards ease-in-out;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.6);
+        }
+
+        @keyframes netflix-intro {
+            0% {
+                opacity: 0;
+                transform: scale(0.7);
+                letter-spacing: 20px;
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+                letter-spacing: 2px;
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.8);
+            }
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         /* --- Navigation --- */
         header {
             position: fixed;
@@ -74,7 +125,7 @@
             top: 50%;
             left: 50%;
             width: 100vw;
-            height: 56.25vw; /* 16:9 Aspect Ratio */
+            height: 56.25vw;
             min-height: 100vh;
             min-width: 177.77vh; 
             transform: translate(-50%, -50%);
@@ -93,7 +144,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%);
             z-index: 1;
         }
 
@@ -106,7 +157,7 @@
         }
 
         .hero-content h1 {
-            font-size: 5rem;
+            font-size: 4.5rem;
             margin: 0;
             font-weight: 900;
             text-transform: uppercase;
@@ -161,7 +212,7 @@
 
         .movie-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 25px;
             margin-bottom: 60px;
         }
@@ -176,7 +227,7 @@
 
         .movie-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
 
-        .movie-card img { width: 100%; height: 400px; object-fit: cover; background: #222; }
+        .movie-card img { width: 100%; height: 350px; object-fit: cover; background: #222; }
 
         .movie-body { padding: 15px; text-align: center; }
 
@@ -207,8 +258,6 @@
             margin-top: 10px;
         }
 
-        .dl-btn.secondary { background: #444; }
-
         footer {
             background: #141414;
             text-align: center;
@@ -220,11 +269,15 @@
         @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
             .sidebar { display: none; }
-            .hero-content h1 { font-size: 3rem; }
+            .hero-content h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
+
+<div id="intro-screen">
+    <div class="intro-logo">CINE CLOUD</div>
+</div>
 
 <header>
     <a href="#" class="logo">CINE CLOUD</a>
@@ -238,21 +291,21 @@
 <section class="hero-section" id="upcoming">
     <div class="video-bg">
         <iframe 
-            src="https://www.youtube.com/embed/aBlsrtxuwss?autoplay=1&mute=1&loop=1&playlist=aBlsrtxuwss&controls=0&modestbranding=1" 
+            src="https://www.youtube.com/embed/aBlsrtxuwss?autoplay=1&mute=1&loop=1&playlist=aBlsrtxuwss&controls=0&modestbranding=1&rel=0" 
             frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
+            allow="autoplay; encrypted-media">
         </iframe>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <span class="badge-upcoming">PREMIER FROM 31st OF JULY 2026</span>
+        <span class="badge-upcoming">PREMIERING TODAY 20:00</span>
         <h1>Spider Man</h1>
-        <h2 style="font-size: 2rem; margin-top: -10px; color: var(--gold);">Brand New Day</h2>
-        <p style="font-size: 1.1rem; color: #ccc; line-height: 1.6;">
-            Peter is now an adult living entirely alone, having voluntarily erased himself from the lives and memories of those he loves. He's devoted himself entirely to protecting his city, but a surprising physical evolution threatens his existence.
+        <h2 style="color: var(--gold); margin-top: -10px;">Brand New Day</h2>
+        <p style="color: #ccc; max-width: 600px; margin: 20px auto;">
+            Peter Parker faces his greatest challenge yet—living a life where no one knows who he is. 
+            Watch the official teaser for the next chapter in the Spidey Saga.
         </p>
-        <p style="color: var(--primary-red); font-weight: bold; font-size: 1.2rem;">[ English Audio + Sinhala Subtitles ]</p>
+        <p style="color: var(--primary-red); font-weight: bold;">[ Tamil + English | Sinhala Subtitles ]</p>
     </div>
 </section>
 
@@ -265,116 +318,73 @@
             <li><a href="#wimpy">Sinhala Dubbed</a></li>
             <li><a href="#upcoming-movies">Upcoming 2026</a></li>
         </ul>
-        <h3 style="margin-top: 40px;">Quality</h3>
-        <ul class="cat-list">
-            <li><a href="#">1080p BluRay</a></li>
-            <li><a href="#">720p HDRip</a></li>
-        </ul>
     </aside>
 
     <main>
         <h2 class="section-header" id="avatar">Avatar Collection</h2>
         <div class="movie-grid">
             <div class="movie-card">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar">
                 <div class="movie-body">
-                    <h3 style="margin:0;">Avatar (2009)</h3>
-                    <p style="color: var(--gold); font-size: 0.9rem; margin: 5px 0;">IMDb: 7.9/10 | BluRay</p>
-                    <button class="btn-toggle" onclick="toggle('av1')">VIEW DOWNLOADS</button>
+                    <h3>Avatar (2009)</h3>
+                    <button class="btn-toggle" onclick="toggle('av1')">VIEW INFO</button>
                     <div id="av1" class="details-pane">
-                        <p><strong>Director:</strong> James Cameron<br>
-                        <strong>Cast:</strong> Sam Worthington, Zoe Saldana</p>
-                        <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4" target="_blank" class="dl-btn">Download 720p HD</a>
+                        <p>A paraplegic Marine dispatched to the moon Pandora on a unique mission.</p>
+                        <a href="#" class="dl-btn">Download 720p</a>
                     </div>
                 </div>
             </div>
-
+            
             <div class="movie-card">
                 <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2">
                 <div class="movie-body">
-                    <h3 style="margin:0;">The Way of Water (2022)</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Subtitles ]</p>
-                    <button class="btn-toggle" onclick="toggle('av2')">VIEW DOWNLOADS</button>
+                    <h3>The Way of Water</h3>
+                    <button class="btn-toggle" onclick="toggle('av2')">VIEW INFO</button>
                     <div id="av2" class="details-pane">
-                        <p><strong>Director:</strong> James Cameron<br>
-                        <strong>Quality:</strong> BluRay | IMDb: 7.5</p>
-                        <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4" class="dl-btn">Download 720p HD</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="movie-card">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar 3">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Fire and Ash (2025)</h3>
-                    <p style="color: var(--gold); font-weight: bold; margin: 5px 0;">COMING SOON</p>
-                    <button class="btn-toggle" onclick="toggle('av3')">VIEW INFO</button>
-                    <div id="av3" class="details-pane">
-                        <p><strong>Status:</strong> Expected 2025<br>
-                        <strong>Subtitle:</strong> Sinhala Subtitles Expected</p>
+                        <p>Jake Sully lives with his newfound family formed on the extrasolar moon Pandora.</p>
+                        <a href="#" class="dl-btn">Download 720p</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h2 class="section-header" id="pirates">Pirates of the Caribbean</h2>
+        <h2 class="section-header" id="wimpy">Sinhala Dubbed</h2>
         <div class="movie-grid">
             <div class="movie-card">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTY4NDcwMzcxN15BMl5BanBnXkFtZTcwMDI2MDE3Mw@@._V1_.jpg" alt="Wimpy Kid">
                 <div class="movie-body">
-                    <h3 style="margin:0;">Curse of the Black Pearl</h3>
-                    <button class="btn-toggle" onclick="toggle('p1')">VIEW DOWNLOADS</button>
-                    <div id="p1" class="details-pane">
-                        <div style="font-size: 0.8rem; margin-bottom: 10px; color: var(--gold);">IMDb: 7.8/10</div>
-                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn">Download 1080p BluRay</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-header" id="wimpy">Diary of a Wimpy Kid (Sinhala)</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://m.media-amazon.com/images/M/MV5BMTY4NDcwMzcxN15BMl5BanBnXkFtZTcwMDI2MDE3Mw@@._V1_.jpg" alt="Wimpy Kid 1">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Wimpy Kid 1 (2010)</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
-                    <button class="btn-toggle" onclick="toggle('w1')">VIEW DOWNLOADS</button>
+                    <h3>Wimpy Kid (2010)</h3>
+                    <p style="color: var(--sinhala-green);">[ Sinhala Dubbed ]</p>
+                    <button class="btn-toggle" onclick="toggle('w1')">VIEW INFO</button>
                     <div id="w1" class="details-pane">
-                        <a href="#" class="dl-btn">Download 720p HD</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="movie-card">
-                <img src="https://m.media-amazon.com/images/M/MV5BMTU3MTIyMzI2MV5BMl5BanBnXkFtZTcwMTc0NDA5NA@@._V1_.jpg" alt="Wimpy Kid 2">
-                <div class="movie-body">
-                    <h3 style="margin:0;">Wimpy Kid 2: Rodrick Rules</h3>
-                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
-                    <button class="btn-toggle" onclick="toggle('w2')">VIEW DOWNLOADS</button>
-                    <div id="w2" class="details-pane">
-                        <a href="#" class="dl-btn">Download 720p HD</a>
+                        <a href="#" class="dl-btn">Download HD</a>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
 </div>
 
 <footer>
-    <p>© 2026 CINE CLOUD | Your Premium Destination for High Quality Movies</p>
+    <p>© 2026 CINE CLOUD | High Quality Movie Downloads</p>
 </footer>
 
 <script>
+    // Toggle details
     function toggle(id) {
         var x = document.getElementById(id);
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } else {
-            x.style.display = "block";
-        }
+        x.style.display = (x.style.display === "block") ? "none" : "block";
     }
+
+    // Splash Screen Logic
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const intro = document.getElementById('intro-screen');
+            intro.classList.add('fade-out');
+            // Remove from DOM after fade to allow clicking elements
+            setTimeout(() => intro.style.display = 'none', 800);
+        }, 2500); 
+    });
 </script>
 
 </body>
