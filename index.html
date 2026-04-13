@@ -3,126 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Download high quality Sinhala Dubbed movies and Action films. 4K, 1080p, and 720p options available.">
-    <title>CINEMA WORLD | High Quality Sinhala Movie Downloads</title>
+    <title>CINEMA WORLD | High Quality Downloads</title>
     <style>
         :root {
             --primary-red: #e50914;
             --dark-bg: #0b0b0b;
             --card-bg: #1a1a1a;
-            --text-main: #ffffff;
             --text-gray: #bbb;
+            --sinhala-green: #00ff00;
             --gold: #f3ce13;
-            --spidey-blue: #0033cc;
-        }
-
-        body.light-mode {
-            --dark-bg: #ffffff;
-            --card-bg: #f4f4f4;
-            --text-main: #1a1a1a;
-            --text-gray: #444;
         }
 
         html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--dark-bg);
-            color: var(--text-main);
+            color: white;
             margin: 0;
-            transition: background 0.3s;
             overflow-x: hidden;
         }
 
         /* --- Navigation --- */
         header {
             position: fixed;
-            top: 0; width: 100%; z-index: 1000;
-            background: rgba(0,0,0,0.95);
-            padding: 10px 5%;
-            display: flex; justify-content: space-between; align-items: center;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-sizing: border-box;
+            backdrop-filter: blur(5px);
         }
 
-        .logo { color: var(--primary-red); text-decoration: none; font-weight: 900; font-size: 1.5rem; }
-
-        .search-container { flex-grow: 1; max-width: 400px; margin: 0 20px; }
-        #movieSearch {
-            width: 100%; padding: 10px; border-radius: 5px; border: 1px solid var(--primary-red);
-            background: #222; color: white;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            text-decoration: none;
+            letter-spacing: 1px;
         }
 
-        .mode-toggle {
-            cursor: pointer; padding: 8px 15px; background: var(--primary-red);
-            color: white; border: none; border-radius: 5px; font-weight: bold;
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
-        /* --- Hero Section (Fixed Trailer) --- */
+        nav a:hover { color: var(--primary-red); }
+
+        /* --- Hero Video Background --- */
         .hero-section {
-            position: relative; height: 65vh; width: 100%;
-            overflow: hidden; margin-top: 60px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .video-bg {
-            position: absolute; top: 50%; left: 50%;
-            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; 
-            transform: translate(-50%, -50%); z-index: -1;
-        }
-        .video-bg iframe {
-            width: 100%; height: 100%; pointer-events: none;
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(0deg, var(--dark-bg) 10%, rgba(0,0,0,0.4) 100%);
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        /* --- New Arrivals Carousel --- */
-        .carousel-section { padding: 20px 5%; background: rgba(229, 9, 20, 0.1); }
-        .carousel-container { display: flex; gap: 20px; overflow-x: auto; padding: 10px 0; }
-        .carousel-item {
-            min-width: 220px; padding: 15px; background: var(--card-bg);
-            border-left: 5px solid var(--primary-red); border-radius: 5px;
-            font-weight: bold; text-align: center;
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 Aspect Ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; 
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .video-bg iframe {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, var(--dark-bg) 5%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(0,0,0,1);
+        }
+
+        .badge-upcoming {
+            background: var(--gold);
+            color: black;
+            padding: 5px 15px;
+            font-weight: 900;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         /* --- Main Content Layout --- */
         .main-container {
-            display: grid; grid-template-columns: 260px 1fr;
-            gap: 30px; padding: 40px 5%;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 30px;
+            padding: 40px 5%;
         }
 
-        .sidebar { background: var(--card-bg); padding: 20px; border-radius: 10px; height: fit-content; }
-        .sidebar h3 { border-bottom: 2px solid var(--primary-red); padding-bottom: 5px; }
+        .sidebar {
+            background: #141414;
+            padding: 20px;
+            border-radius: 10px;
+            height: fit-content;
+            border: 1px solid #222;
+        }
 
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        
+        .sidebar h3 {
+            border-left: 4px solid var(--primary-red);
+            padding-left: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .cat-list { list-style: none; padding: 0; margin: 0; }
+        .cat-list li { margin: 15px 0; }
+        .cat-list a { color: var(--text-gray); text-decoration: none; transition: 0.3s; }
+        .cat-list a:hover { color: var(--primary-red); padding-left: 5px; }
+
+        /* --- Movie Grids --- */
+        .section-header {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
         .movie-card {
-            background: var(--card-bg); border-radius: 12px;
-            overflow: hidden; border: 1px solid #333; transition: 0.3s;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: 0.3s ease;
         }
+
         .movie-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
-        .movie-card img { width: 100%; height: 420px; object-fit: cover; }
 
-        .quality-table {
-            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.8rem;
+        .movie-card img { width: 100%; height: 200px; object-fit: cover; background: #222; }
+
+        .movie-body { padding: 15px; text-align: center; }
+
+        .btn-toggle {
+            width: 100%;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
         }
-        .quality-table th { background: rgba(229, 9, 20, 0.2); color: var(--gold); padding: 8px; }
-        .quality-table td { padding: 10px; border-bottom: 1px solid #333; text-align: center; }
-        
-        .dl-link { color: var(--primary-red); text-decoration: none; font-weight: bold; }
 
-        /* --- Request Form --- */
-        .request-form {
-            background: var(--card-bg); padding: 25px; border-radius: 10px;
-            border: 2px dashed var(--primary-red); margin-top: 50px;
+        .details-pane { display: none; padding-top: 15px; text-align: left; }
+        .details-pane p { font-size: 0.85rem; color: #999; line-height: 1.4; }
+
+        .dl-btn {
+            background: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            display: block;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
         }
-        .request-form input { width: 95%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; }
 
-        /* --- Mobile Responsiveness --- */
-        @media (max-width: 850px) {
+        .dl-btn.secondary { background: #444; }
+
+        footer {
+            background: #141414;
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
-            .hero-section h1 { font-size: 2rem !important; }
-            header { flex-direction: column; height: auto; padding: 10px; }
-            .search-container { width: 100%; margin: 10px 0; }
+            .sidebar { display: none; }
+            .hero-content h1 { font-size: 3rem; }
         }
     </style>
 </head>
@@ -130,191 +228,178 @@
 
 <header>
     <a href="#" class="logo">CINEMA WORLD</a>
-    <div class="search-container">
-        <input type="text" id="movieSearch" placeholder="Search (Wimpy Kid, Avatar, Action...)" onkeyup="filterMovies()">
-    </div>
-    <button class="mode-toggle" onclick="toggleTheme()">🌓 Theme Mode</button>
+    <nav>
+        <a href="#pirates">ACTION</a>
+        <a href="#avatar">AVATAR</a>
+        <a href="#wimpy">SINHALA DUBBED</a>
+        <a href="#upcoming">UPCOMING</a>
+    </nav>
 </header>
 
-<section class="hero-section">
+<section class="hero-section" id="upcoming">
     <div class="video-bg">
         <iframe 
-            src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&loop=1&playlist=8TZMtslA3UY&controls=0&showinfo=0&rel=0&modestbranding=1" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media">
+            src="https://www.youtube.com/embed/ZgWrFoaisdk?autoplay=1&mute=1&loop=1&playlist=ZgWrFoaisdk&controls=0&showinfo=0&rel=0&modestbranding=1" 
+            frameborder="0" allow="autoplay; encrypted-media">
         </iframe>
     </div>
     <div class="hero-overlay"></div>
-    <div style="position: relative; z-index: 5; text-align: center; padding: 20px;">
-        <h1 style="font-size: 4rem; text-transform: uppercase; text-shadow: 3px 3px var(--primary-red);">Spider-Man: Brand New Day</h1>
-        <p style="color: var(--gold); font-weight: bold;">[ 4K ULTRA HD | SINHALA SUBTITLES EXPECTED ]</p>
-        <button onclick="alert('Subscription Added! We will notify you.')" style="background:var(--primary-red); color:white; border:none; padding:12px 25px; border-radius:5px; font-weight:bold; cursor:pointer;">🔔 NOTIFY ON SUB RELEASE</button>
-    </div>
-</section>
-
-<section class="carousel-section">
-    <h3 style="margin: 0 0 10px 0;">🔥 NEW ARRIVALS</h3>
-    <div class="carousel-container">
-        <div class="carousel-item">Wimpy Kid Collection</div>
-        <div class="carousel-item">Avatar: Way of Water</div>
-        <div class="carousel-item">Spider-Man (2026)</div>
-        <div class="carousel-item">Pirates: Black Pearl</div>
+    <div class="hero-content">
+        <span class="badge-upcoming">PREMIER FROM TODAY 20:00</span>
+        <h1>Jana Nayagan</h1>
+        <p style="font-size: 1.2rem; color: #ccc;">Thalapathy Vijay's final epic action thriller. Witness the revolution.</p>
+        <p style="color: var(--primary-red); font-weight: bold;">[ Tamil Audio + Sinhala Subtitles ]</p>
     </div>
 </section>
 
 <div class="main-container">
     <aside class="sidebar">
         <h3>Categories</h3>
-        <p>🎬 Sinhala Dubbed</p>
-        <p>🎬 4K Action Films</p>
-        <p>🎬 Kids & Animation</p>
-        <hr>
-        <div style="text-align: center; background: #000; padding: 15px; border-radius: 8px; border: 1px solid var(--gold);">
-            <p style="font-size: 0.7rem; color: var(--gold); margin: 0;">AVURUDU COUNTDOWN</p>
-            <div id="avurudu-timer" style="font-weight: bold; font-family: monospace; font-size: 1.2rem; color: white;">00:00:00:00</div>
-        </div>
+        <ul class="cat-list">
+            <li><a href="#pirates">Action Adventure</a></li>
+            <li><a href="#avatar">Avatar Collection</a></li>
+            <li><a href="#wimpy">Sinhala Dubbed</a></li>
+            <li><a href="#upcoming-movies">Upcoming 2025</a></li>
+        </ul>
+        <h3 style="margin-top: 40px;">Quality</h3>
+        <ul class="cat-list">
+            <li><a href="#">1080p BluRay</a></li>
+            <li><a href="#">720p HDRip</a></li>
+        </ul>
     </aside>
 
-    <main id="movieContainer">
-        
-        <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px;">Diary of a Wimpy Kid Collection</h2>
+    <main>
+        <h2 class="section-header" id="avatar">Avatar Collection</h2>
         <div class="movie-grid">
-            <article class="movie-card" data-title="diary of a wimpy kid 1 sinhala dubbed">
-                <img src="https://image.tmdb.org/t/p/w500/mXpSAn8HscM60OasvC7q5654C4h.jpg" alt="Wimpy Kid 1 Sinhala Download">
-                <div style="padding: 15px;">
-                    <h3>Wimpy Kid (2010)</h3>
-                    <p style="color: #00ff00; font-size: 0.8rem;">[ Sinhala Dubbed ]</p>
-                    <table class="quality-table">
-                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p HD</td><td>850MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
-                    </table>
+            <div class="movie-card">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009">
+                <div class="movie-body">
+                    <h3 style="margin:0;">Avatar (2009)</h3>
+                    <p style="color: var(--gold); font-size: 0.9rem; margin: 5px 0;">IMDb: 7.9/10 | BluRay</p>
+                    <button class="btn-toggle" onclick="toggle('av1')">VIEW DOWNLOADS</button>
+                    <div id="av1" class="details-pane">
+                        <p><strong>Director:</strong> James Cameron<br>
+                        <strong>Cast:</strong> Sam Worthington, Zoe Saldana<br>
+                        <strong>Runtime:</strong> 162 min</p>
+                        <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4" target="_blank" class="dl-btn">Download 720p HD</a>
+                    </div>
                 </div>
-            </article>
+            </div>
 
-            <article class="movie-card" data-title="diary of a wimpy kid 2 rodrick rules sinhala">
-                <img src="https://image.tmdb.org/t/p/w500/fDAs3Y1t2W31lP4z7N6zXgY66R5.jpg" alt="Wimpy Kid 2 Sinhala Download">
-                <div style="padding: 15px;">
-                    <h3>Wimpy Kid 2: Rodrick Rules</h3>
-                    <p style="color: #00ff00; font-size: 0.8rem;">[ Sinhala Dubbed ]</p>
-                    <table class="quality-table">
-                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p HD</td><td>910MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
-                    </table>
+            <div class="movie-card">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2">
+                <div class="movie-body">
+                    <h3 style="margin:0;">The Way of Water (2022)</h3>
+                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Subtitles ]</p>
+                    <button class="btn-toggle" onclick="toggle('av2')">VIEW DOWNLOADS</button>
+                    <div id="av2" class="details-pane">
+                        <p><strong>Director:</strong> James Cameron<br>
+                        <strong>Quality:</strong> BluRay | IMDb: 7.5</p>
+                        <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4" class="dl-btn">Download 720p HD</a>
+                    </div>
                 </div>
-            </article>
+            </div>
 
-            <article class="movie-card" data-title="diary of a wimpy kid 3 dog days sinhala">
-                <img src="https://image.tmdb.org/t/p/w500/98vE3qK23fI4M9y0VOfG7e2Z8uU.jpg" alt="Wimpy Kid 3 Sinhala Download">
-                <div style="padding: 15px;">
-                    <h3>Wimpy Kid 3: Dog Days</h3>
-                    <p style="color: #00ff00; font-size: 0.8rem;">[ Sinhala Dubbed ]</p>
-                    <table class="quality-table">
-                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p HD</td><td>880MB</td><td><a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%203:%20Dog%20Days%20(2012)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-link">Download</a></td></tr>
-                    </table>
+             <div class="movie-card">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar 3">
+                <div class="movie-body">
+                    <h3 style="margin:0;">Fire and Ash (2025)</h3>
+                    <p style="color: var(--gold); font-weight: bold; margin: 5px 0;">COMING SOON</p>
+                    <button class="btn-toggle" onclick="toggle('av3')">VIEW INFO</button>
+                    <div id="av3" class="details-pane">
+                        <p><strong>Director:</strong> James Cameron<br>
+                        <strong>Status:</strong> Expected 2025<br>
+                        <strong>Subtitle:</strong> Sinhala Subtitles Expected</p>
+                    </div>
                 </div>
-            </article>
+            </div>
         </div>
 
-        <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px; margin-top: 50px;">Avatar Collection</h2>
+        <h2 class="section-header" id="pirates">Pirates of the Caribbean</h2>
         <div class="movie-grid">
-            <article class="movie-card" data-title="avatar 2009 bluray">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009 Download">
-                <div style="padding: 15px;">
-                    <h3>Avatar (2009)</h3>
-                    <table class="quality-table">
-                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>720p BR</td><td>1.2GB</td><td><a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-720p.mp4" class="dl-link">Download</a></td></tr>
-                        <tr><td>1080p BR</td><td>2.8GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
-                    </table>
+            <div class="movie-card">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1">
+                <div class="movie-body">
+                    <h3 style="margin:0;">The Curse of the Black Pearl</h3>
+                    <button class="btn-toggle" onclick="toggle('p1')">VIEW DOWNLOADS</button>
+                    <div id="p1" class="details-pane">
+                        <div style="font-size: 0.8rem; margin-bottom: 10px; color: var(--gold);">IMDb: 7.8/10 | English Audio</div>
+                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn">Download 1080p BluRay</a>
+                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn secondary">Download 720p HD</a>
+                    </div>
                 </div>
-            </article>
-
-            <article class="movie-card" data-title="avatar the way of water avatar 2 4k">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2 Download">
-                <div style="padding: 15px;">
-                    <h3>Avatar: Way of Water</h3>
-                    <table class="quality-table">
-                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>1080p</td><td>3.1GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
-                        <tr><td>4K UHD</td><td>14.2GB</td><td><a href="#" class="dl-link">Download</a></td></tr>
-                    </table>
-                </div>
-            </article>
+            </div>
         </div>
 
-        <h2 style="border-left: 5px solid var(--primary-red); padding-left: 10px; margin-top: 50px;">Action Specials</h2>
+        <h2 class="section-header" id="wimpy">Diary of a Wimpy Kid (Sinhala Dubbed)</h2>
         <div class="movie-grid">
-            <article class="movie-card" data-title="pirates of the caribbean black pearl">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1 Download">
-                <div style="padding: 15px;">
-                    <h3>Pirates: Black Pearl</h3>
-                    <table class="quality-table">
-                        <tr><th>Res</th><th>Size</th><th>Link</th></tr>
-                        <tr><td>1080p</td><td>2.1GB</td><td><a href="https://pixeldrain.com/u/AyChGtcW" class="dl-link">Download</a></td></tr>
-                    </table>
+            <div class="movie-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTY3NjE1NTE4NF5BMl5BanBnXkFtZTcwOTUyODI5Mw@@._V1_FMjpg_UX1000_.jpg" alt="Wimpy Kid 1">
+                <div class="movie-body">
+                    <h3 style="margin:0;">Wimpy Kid 1 (2010)</h3>
+                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
+                    <button class="btn-toggle" onclick="toggle('w1')">VIEW DOWNLOADS</button>
+                    <div id="w1" class="details-pane">
+                        <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%201%20:%20(2010)%20-%20720P%20HD%20-%20@sinhalafilmsgo.mp4" class="dl-btn">Download 720p HD</a>
+                    </div>
                 </div>
-            </article>
+            </div>
+
+            <div class="movie-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTQ2NDM4MDI0Ml5BMl5BanBnXkFtZTcwMjA3OTc5NA@@._V1_.jpg" alt="Wimpy Kid 2">
+                <div class="movie-body">
+                    <h3 style="margin:0;">Wimpy Kid 2: Rodrick Rules</h3>
+                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
+                    <button class="btn-toggle" onclick="toggle('w2')">VIEW DOWNLOADS</button>
+                    <div id="w2" class="details-pane">
+                        <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%202:%20Rodrick%20Rules%20(2011)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-btn">Download 720p HD</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjA0MjY2MDUwN15BMl5BanBnXkFtZTcwNTg5MzY1OA@@._V1_.jpg" alt="Wimpy Kid 3">
+                <div class="movie-body">
+                    <h3 style="margin:0;">Wimpy Kid 3: Dog Days</h3>
+                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
+                    <button class="btn-toggle" onclick="toggle('w3')">VIEW DOWNLOADS</button>
+                    <div id="w3" class="details-pane">
+                        <a href="https://cloud.sinhalachr.workers.dev/17:/Diary%20of%20a%20Wimpy%20Kid%203:%20Dog%20Days%20(2012)%20-%20720P%20HD%20-@sinhalafilmsgo.mp4" class="dl-btn">Download 720p HD</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <section class="request-form">
-            <h3>🎬 REQUEST A MOVIE</h3>
-            <p style="font-size: 0.8rem; color: var(--text-gray);">Can't find a movie? Send us a request and we will add it.</p>
-            <input type="text" id="reqName" placeholder="Movie Title...">
-            <button onclick="alert('Request sent successfully!')" style="width:100%; padding:10px; background:var(--primary-red); color:white; border:none; font-weight:bold; cursor:pointer; border-radius:5px;">SUBMIT REQUEST</button>
-        </section>
-
+        <h2 class="section-header" id="upcoming-movies">Upcoming Releases 2025</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar Fire and Ash">
+                <div class="movie-body">
+                    <h3 style="margin:0;">Avatar: Fire and Ash</h3>
+                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Subtitles Expected ]</p>
+                    <button class="btn-toggle" onclick="toggle('up1')">MOVIE DETAILS</button>
+                    <div id="up1" class="details-pane">
+                        <p><strong>Status:</strong> Pre-Production<br><strong>Release:</strong> 2025</p>
+                        <a href="#" class="dl-btn secondary" style="cursor: not-allowed;">Releasing Soon...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </div>
 
-<div id="music-container" style="position: fixed; bottom: 20px; left: 20px; z-index: 2000;">
-    <button class="mode-toggle" onclick="toggleMusic()" style="border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">🎵 Music Player</button>
-    <iframe id="bgAudio" width="0" height="0" src="https://www.youtube.com/embed/5waetzP_Fps?enablejsapi=1&autoplay=1&mute=1" frameborder="0"></iframe>
-</div>
-
 <footer>
-    <div style="background: #000; color: #555; text-align: center; padding: 40px; border-top: 2px solid var(--primary-red);">
-        <p>© 2026 CINEMA WORLD | High Quality Portal | <span style="color:var(--gold);">Sri Lanka Avurudu Edition</span></p>
-    </div>
+    <p>© 2026 CINEMA WORLD | Your Premium Destination for High Quality Movies</p>
 </footer>
 
 <script>
-    // 1. Live Search Logic
-    function filterMovies() {
-        let val = document.getElementById('movieSearch').value.toLowerCase();
-        let cards = document.getElementsByClassName('movie-card');
-        for (let card of cards) {
-            let title = card.getAttribute('data-title');
-            card.style.display = title.includes(val) ? "block" : "none";
+    function toggle(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
         }
-    }
-
-    // 2. Dark/Light Theme Toggle
-    function toggleTheme() {
-        document.body.classList.toggle('light-mode');
-    }
-
-    // 3. Avurudu Countdown Timer
-    function updateTimer() {
-        const target = new Date("April 14, 2026 00:00:00").getTime();
-        const now = new Date().getTime();
-        const dist = target - now;
-        if (dist < 0) {
-            document.getElementById("avurudu-timer").innerHTML = "HAPPY NEW YEAR!";
-            return;
-        }
-        const d = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        const s = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        document.getElementById("avurudu-timer").innerHTML = `${d}:${h}:${m}:${s}`;
-    }
-    setInterval(updateTimer, 1000);
-    updateTimer();
-
-    // 4. Music Logic
-    function toggleMusic() {
-        alert("Music control triggered! Please check your browser's autoplay permissions to hear the audio.");
     }
 </script>
 
