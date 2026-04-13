@@ -182,7 +182,7 @@
         }
 
         .movie-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
-        .movie-card img { width: 100%; height: 400px; object-fit: cover; background: #222; }
+        .movie-card img { width: 100%; height: 220px; object-fit: cover; background: #222; }
         .movie-body { padding: 15px; text-align: center; }
 
         .btn-toggle {
@@ -198,7 +198,8 @@
         }
 
         .details-pane { display: none; padding-top: 15px; text-align: left; }
-        
+        .details-pane p { font-size: 0.85rem; color: #999; line-height: 1.4; }
+
         .dl-btn {
             background: var(--primary-red);
             color: white;
@@ -210,6 +211,8 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        .dl-btn.secondary { background: #444; }
 
         footer {
             background: #141414;
@@ -250,7 +253,7 @@
         <span class="badge-upcoming">WORLD PREMIERE | OFFICIAL TRAILER</span>
         <h1>Spider-Man: Brand New Day</h1>
         <p style="font-size: 1.3rem; color: #eee; margin-top: 15px; line-height: 1.6;">
-            The world has forgotten Peter Parker. Now, stripped of his past and his allies, 
+            The world has forgotten who Peter Parker is. Now, stripped of his past and his allies, 
             he must face a new era of villains in a rebirth that changes everything.
         </p>
         <p style="color: var(--gold); font-weight: bold; letter-spacing: 1px;">[ 4K UHD | Sinhala Subtitles Expected ]</p>
@@ -301,10 +304,24 @@
             </div>
         </div>
 
+        <h2 class="section-header" id="pirates">Pirates of the Caribbean</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1">
+                <div class="movie-body">
+                    <h3 style="margin:0;">The Curse of the Black Pearl</h3>
+                    <button class="btn-toggle" onclick="toggle('p1')">VIEW DOWNLOADS</button>
+                    <div id="p1" class="details-pane">
+                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn">Download 1080p BluRay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h2 class="section-header" id="wimpy">Diary of a Wimpy Kid (Sinhala Dubbed)</h2>
         <div class="movie-grid">
             <div class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w500/mXpSAn8HscM60OasvC7q5654C4h.jpg" alt="Diary of a Wimpy Kid 1">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTY3NjE1NTE4NF5BMl5BanBnXkFtZTcwOTUyODI5Mw@@._V1_.jpg" alt="Wimpy Kid 1">
                 <div class="movie-body">
                     <h3 style="margin:0;">Wimpy Kid 1 (2010)</h3>
                     <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
@@ -315,7 +332,7 @@
                 </div>
             </div>
             <div class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w500/fDAs3Y1t2W31lP4z7N6zXgY66R5.jpg" alt="Diary of a Wimpy Kid 2">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTQ2NDM4MDI0Ml5BMl5BanBnXkFtZTcwMjA3OTc5NA@@._V1_.jpg" alt="Wimpy Kid 2">
                 <div class="movie-body">
                     <h3 style="margin:0;">Wimpy Kid 2: Rodrick Rules</h3>
                     <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
@@ -326,7 +343,7 @@
                 </div>
             </div>
             <div class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w500/98vE3qK23fI4M9y0VOfG7e2Z8uU.jpg" alt="Diary of a Wimpy Kid 3">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjA0MjY2MDUwN15BMl5BanBnXkFtZTcwNTg5MzY1OA@@._V1_.jpg" alt="Wimpy Kid 3">
                 <div class="movie-body">
                     <h3 style="margin:0;">Wimpy Kid 3: Dog Days</h3>
                     <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Sinhala Dubbed ]</p>
@@ -338,15 +355,17 @@
             </div>
         </div>
 
-        <h2 class="section-header" id="pirates">Pirates of the Caribbean</h2>
+        <h2 class="section-header" id="upcoming-movies">Upcoming Blockbusters</h2>
         <div class="movie-grid">
             <div class="movie-card">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" alt="Pirates 1">
+                <img src="https://i.ytimg.com/vi/8TZMtslA3UY/maxresdefault.jpg" alt="Spider-Man">
                 <div class="movie-body">
-                    <h3 style="margin:0;">The Curse of the Black Pearl</h3>
-                    <button class="btn-toggle" onclick="toggle('p1')">VIEW DOWNLOADS</button>
-                    <div id="p1" class="details-pane">
-                        <a href="https://pixeldrain.com/u/AyChGtcW" target="_blank" class="dl-btn">Download 1080p BluRay</a>
+                    <h3 style="margin:0;">Spider-Man: Brand New Day</h3>
+                    <p style="color: var(--sinhala-green); font-weight: bold; margin: 5px 0;">[ Coming 2026 ]</p>
+                    <button class="btn-toggle" onclick="toggle('up1')">MOVIE DETAILS</button>
+                    <div id="up1" class="details-pane">
+                        <p><strong>Release:</strong> Summer 2026<br><strong>Status:</strong> In Production</p>
+                        <a href="#" class="dl-btn secondary" style="cursor: not-allowed;">Releasing Soon...</a>
                     </div>
                 </div>
             </div>
