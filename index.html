@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-black: #050505;
-            --card-bg: #121212;
+            --panel-bg: #111111;
             --accent-red: #e50914;
             --avatar-blue: #00d4ff;
             --text-main: #ffffff;
@@ -18,7 +18,7 @@
         
         body {
             margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-black);
             color: var(--text-main);
             overflow-x: hidden;
@@ -53,13 +53,11 @@
             font-size: 13px; 
             font-weight: 700; 
             text-transform: uppercase; 
-            transition: 0.3s;
         }
-        .nav-links a:hover { color: white; }
 
         /* --- Hero / Upcoming Section --- */
         .hero {
-            height: 85vh;
+            height: 80vh;
             position: relative;
             display: flex;
             align-items: center;
@@ -81,8 +79,8 @@
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, var(--bg-black) 5%, transparent 40%),
-                        linear-gradient(to right, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.2) 60%);
+            background: linear-gradient(to top, var(--bg-black) 5%, transparent 50%),
+                        linear-gradient(to right, rgba(0,0,0,0.9) 15%, transparent 70%);
             z-index: 1;
         }
 
@@ -99,133 +97,126 @@
             text-transform: uppercase; 
             font-weight: 900;
             line-height: 0.9;
-            letter-spacing: -2px;
         }
 
-        .hero-description {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-top: 20px;
-            line-height: 1.6;
-        }
-
-        /* --- Collections Area --- */
-        .collection-container {
-            padding: 40px 5% 100px 5%;
+        /* --- Collection Row --- */
+        .collection-area {
+            padding: 40px 5% 20px 5%;
             background: var(--bg-black);
             position: relative;
             z-index: 20;
         }
 
         .section-header {
-            font-size: 22px;
-            font-weight: 900;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 25px;
             color: var(--avatar-blue);
             text-transform: uppercase;
         }
 
-        /* Horizontal Side-Scroll Row */
         .horizontal-scroll {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             overflow-x: auto;
-            padding: 10px 0 20px 0;
-            scrollbar-width: thin;
-            scrollbar-color: #333 transparent;
+            padding-bottom: 20px;
+            scrollbar-width: none;
         }
 
-        .horizontal-scroll::-webkit-scrollbar { height: 4px; }
-        .horizontal-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
 
-        .movie-group {
-            display: flex;
-            flex-direction: column;
-            flex: 0 0 220px; /* Fixed width for posters */
-        }
-
-        .movie-poster {
+        .movie-card {
+            flex: 0 0 200px;
             cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover { transform: scale(1.08); }
+
+        .movie-card img {
             width: 100%;
             border-radius: 8px;
             border: 2px solid transparent;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        .movie-poster:hover {
-            transform: scale(1.05);
-            border-color: var(--avatar-blue);
+        .movie-card:hover img { border-color: var(--avatar-blue); }
+
+        /* --- Bottom Info Panel (The "Down" Detail Section) --- */
+        .bottom-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--panel-bg);
+            border-top: 2px solid var(--avatar-blue);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2000;
+            padding: 40px 5%;
+            box-sizing: border-box;
+            display: none; /* Hidden by default */
         }
 
-        /* --- The Details Panel (Slides Down) --- */
-        .details-panel {
-            max-height: 0;
-            overflow: hidden;
-            background: var(--card-bg);
-            border-radius: 12px;
-            transition: all 0.5s ease;
-            width: 90vw; /* Wide panel */
-            position: absolute;
-            left: 5%;
-            margin-top: 10px;
-            opacity: 0;
-            pointer-events: none;
+        .bottom-panel.active {
+            display: block;
+            transform: translateY(0);
         }
 
-        /* Logic to open panel on hover/touch of the group */
-        .movie-group:hover .details-panel,
-        .movie-group:active .details-panel {
-            max-height: 800px;
-            opacity: 1;
-            padding: 30px;
-            margin-top: 20px;
-            border: 1px solid #333;
-            pointer-events: auto;
-            z-index: 50;
-        }
-
-        .panel-content {
+        .panel-layout {
             display: flex;
             gap: 40px;
-            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .panel-text h2 { margin: 0 0 15px 0; color: var(--avatar-blue); font-size: 32px; }
-        .panel-text p { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 5px 0; }
+        .panel-close {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .panel-poster {
+            width: 200px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .panel-info h2 { margin: 0 0 10px 0; color: var(--avatar-blue); font-size: 32px; }
         
-        .meta-tag {
-            display: inline-block;
-            background: #222;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
+        .panel-meta {
+            font-size: 14px;
             color: #46d369;
+            font-weight: bold;
             margin-bottom: 20px;
-            font-size: 13px;
         }
 
-        .download-btn {
+        .panel-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 700px;
+        }
+
+        .dl-btn {
             display: inline-block;
             margin-top: 25px;
-            padding: 12px 35px;
+            padding: 12px 30px;
             background: var(--avatar-blue);
             color: #000;
             text-decoration: none;
             font-weight: 800;
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: 5px;
             text-transform: uppercase;
-            transition: 0.3s;
         }
 
-        .download-btn:hover { background: white; transform: translateY(-3px); }
-
         @media (max-width: 768px) {
+            .panel-poster { display: none; }
             .hero-content h1 { font-size: 2.5rem; }
-            .panel-content { flex-direction: column; }
-            .movie-group { flex: 0 0 160px; }
         }
     </style>
 </head>
@@ -236,80 +227,104 @@
         <div class="nav-links">
             <a href="#upcoming">Upcoming</a>
             <a href="#collections">Avatar Collection</a>
-            <a href="#collections">Dubbed</a>
-            <a href="#collections">Action</a>
+            <a href="#">Dubbed</a>
+            <a href="#">Action</a>
         </div>
     </nav>
 
     <div id="upcoming" class="hero">
         <div class="video-background">
-            <iframe 
-                src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY&modestbranding=1&rel=0" 
-                allow="autoplay; encrypted-media">
-            </iframe>
+            <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY" allow="autoplay"></iframe>
         </div>
         <div class="overlay"></div>
         <div class="hero-content">
             <h1>SPIDER-MAN<br>BRAND NEW DAY</h1>
-            <p class="hero-description">
-                Four years have passed since the events of No Way Home, and Peter is now an adult living entirely alone, having voluntarily erased himself from the lives and memories of those he loves. Devoted entirely to protecting his city — he is a full-time Spider-Man.
-            </p>
         </div>
     </div>
 
-    <div id="collections" class="collection-container">
+    <div id="collections" class="collection-area">
         <div class="section-header">Avatar Collection</div>
-        
         <div class="horizontal-scroll">
             
-            <div class="movie-group">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" class="movie-poster" alt="Avatar 2009">
-                <div class="details-panel">
-                    <div class="panel-content">
-                        <div class="panel-text">
-                            <h2>Avatar (2009)</h2>
-                            <div class="meta-tag">BluRay | IMDb: 7.9 | 26,414 Views</div>
-                            <p><strong>Director:</strong> James Cameron & Team</p>
-                            <p><strong>Country:</strong> UK, USA | <strong>Year:</strong> 2009</p>
-                            <p>English Action/Sci-Fi masterpiece.</p>
-                            <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" class="download-btn">Download 720p</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="movie-card" onclick="showPanel('avatar1')">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009">
             </div>
 
-            <div class="movie-group">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" class="movie-poster" alt="Avatar 2022">
-                <div class="details-panel">
-                    <div class="panel-content">
-                        <div class="panel-text">
-                            <h2>The Way of Water (2022)</h2>
-                            <div class="meta-tag">BluRay | IMDb: 7.5 | Sinhala Subtitles</div>
-                            <p><strong>Director:</strong> James Cameron, Garrett Warren, Maria Battle Campbell</p>
-                            <p><strong>Country:</strong> USA | <strong>Year:</strong> 2022</p>
-                            <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI" class="download-btn">Download 720p</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="movie-card" onclick="showPanel('avatar2')">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2022">
             </div>
 
-            <div class="movie-group">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" class="movie-poster" alt="Avatar 2025">
-                <div class="details-panel">
-                    <div class="panel-content">
-                        <div class="panel-text">
-                            <h2>Fire and Ash (2025)</h2>
-                            <div class="meta-tag">WEB | IMDb: 7.4 | Upcoming</div>
-                            <p><strong>Director:</strong> James Cameron, Garrett Warren, Richard Bluck</p>
-                            <p><strong>Country:</strong> USA | <strong>Year:</strong> 2025</p>
-                            <p style="color:var(--avatar-blue); font-weight: bold;">Coming Soon to CINE CLOUD</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="movie-card" onclick="showPanel('avatar3')">
+                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar 2025">
             </div>
 
         </div>
     </div>
+
+    <div id="detailsPanel" class="bottom-panel">
+        <div class="panel-layout">
+            <div class="panel-close" onclick="hidePanel()">&times;</div>
+            <img id="panelImg" class="panel-poster" src="" alt="Poster">
+            <div class="panel-info">
+                <h2 id="panelTitle">Movie Title</h2>
+                <div id="panelMeta" class="panel-meta">IMDb: 0.0</div>
+                <div id="panelDesc" class="panel-desc">Description goes here...</div>
+                <a id="panelDl" href="#" class="dl-btn">Download 720p</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const movieData = {
+            avatar1: {
+                title: "Avatar (2009)",
+                img: "https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
+                meta: "BluRay IMDb: 7.9 | 162 min | 26,414 Views",
+                desc: "Director: James Cameron | Country: UK, USA | Year: 2009. An epic journey to Pandora.",
+                link: "https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e",
+                showBtn: true
+            },
+            avatar2: {
+                title: "Avatar: The Way of Water",
+                img: "https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+                meta: "BluRay IMDb: 7.5 | Sinhala Subtitles",
+                desc: "Director: James Cameron | Country: USA | Year: 2022. The story of the Sully family and the oceans of Pandora.",
+                link: "https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI",
+                showBtn: true
+            },
+            avatar3: {
+                title: "Avatar: Fire and Ash",
+                img: "https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg",
+                meta: "WEB IMDb: 7.4 | Coming 2025",
+                desc: "Director: James Cameron | The upcoming third chapter of the Avatar franchise.",
+                link: "#",
+                showBtn: false
+            }
+        };
+
+        function showPanel(id) {
+            const data = movieData[id];
+            document.getElementById('panelTitle').innerText = data.title;
+            document.getElementById('panelImg').src = data.img;
+            document.getElementById('panelMeta').innerText = data.meta;
+            document.getElementById('panelDesc').innerText = data.desc;
+            
+            const btn = document.getElementById('panelDl');
+            if(data.showBtn) {
+                btn.style.display = "inline-block";
+                btn.href = data.link;
+            } else {
+                btn.style.display = "none";
+            }
+
+            const panel = document.getElementById('detailsPanel');
+            panel.classList.add('active');
+        }
+
+        function hidePanel() {
+            document.getElementById('detailsPanel').classList.remove('active');
+        }
+    </script>
 
 </body>
 </html>
