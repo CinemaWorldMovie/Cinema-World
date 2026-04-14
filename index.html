@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINE CLOUD | Collections</title>
+    <title>CINE CLOUD | Avatar Collection</title>
     <style>
         :root {
             --bg-black: #050505;
-            --card-bg: #111111;
+            --card-bg: #1a1a1a;
             --accent-red: #e50914;
-            --accent-blue: #00b4d8; /* Avatar theme blue */
+            --avatar-blue: #00d4ff;
             --text-main: #ffffff;
-            --text-muted: #b3b3b3;
+            --text-muted: #a0a0a0;
         }
 
         html { scroll-behavior: smooth; }
-
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-black);
             color: var(--text-main);
             overflow-x: hidden;
@@ -26,177 +25,138 @@
 
         /* --- Navigation --- */
         nav {
-            height: 80px;
+            height: 70px;
             display: flex;
             align-items: center;
             padding: 0 5%;
             position: fixed;
             width: 100%;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
         }
 
-        .logo {
-            font-weight: 900;
-            font-size: 24px;
-            letter-spacing: 2px;
-            color: var(--accent-red);
-            text-decoration: none;
-        }
+        .logo { font-weight: 900; font-size: 22px; color: var(--accent-red); text-decoration: none; letter-spacing: 1px; }
         .logo span { color: white; }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            margin-left: 60px;
-        }
-
-        .nav-links a {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
+        .nav-links { display: flex; gap: 25px; margin-left: 50px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; }
         .nav-links a:hover { color: white; }
 
-        /* --- Hero / Upcoming Section --- */
+        /* --- Hero Section --- */
         .hero {
+            height: 70vh;
             position: relative;
-            height: 100vh;
-            width: 100%;
             display: flex;
             align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
         .video-background {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100vh;
-            min-width: 177.77vh;
+            top: 50%; left: 50%;
+            width: 100vw; height: 56.25vw;
+            min-height: 100vh; min-width: 177.77vh;
             transform: translate(-50%, -50%);
             z-index: -1;
-            pointer-events: none;
         }
-
-        .video-background iframe { width: 100%; height: 100%; border: none; }
 
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.9) 100%);
+            background: linear-gradient(to top, var(--bg-black), transparent 50%),
+                        linear-gradient(to right, rgba(0,0,0,0.8), transparent);
             z-index: 1;
         }
 
-        .hero-content {
+        .hero-content { position: relative; z-index: 10; width: 90%; max-width: 1200px; }
+        .hero-content h1 { font-size: 3.5rem; margin: 0; text-transform: uppercase; }
+
+        /* --- Interactive Collection --- */
+        .collection-container {
+            padding: 40px 5%;
+            margin-top: -80px;
             position: relative;
-            z-index: 10;
-            padding-left: 5%;
-            max-width: 700px;
+            z-index: 20;
         }
 
-        .hero-content h1 {
-            font-size: 4.5rem;
-            margin: 0;
-            line-height: 0.9;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        .description {
-            font-size: 15px;
-            line-height: 1.6;
-            margin: 20px 0;
-            color: var(--text-muted);
-        }
-
-        /* --- Collection Section --- */
-        .collection-section {
-            padding: 80px 5%;
-            background: var(--bg-black);
-        }
-
-        .section-title {
-            font-size: 26px;
-            font-weight: 900;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            border-left: 5px solid var(--accent-blue);
-            padding-left: 15px;
-        }
-
-        .collection-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-        }
-
-        .movie-entry {
-            display: flex;
-            gap: 40px;
-            background: rgba(255,255,255,0.02);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
-
-        .movie-entry:hover { border-color: var(--accent-blue); }
-
-        .movie-poster {
-            width: 220px;
-            flex-shrink: 0;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .movie-info { flex-grow: 1; }
-
-        .movie-info h2 {
-            margin: 0 0 10px 0;
-            font-size: 28px;
-            color: var(--accent-blue);
-        }
-
-        .movie-meta {
-            font-size: 13px;
-            color: #46d369;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .movie-details {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .download-btn {
-            display: inline-block;
-            margin-top: 20px;
-            background: var(--accent-blue);
-            color: black;
-            padding: 10px 25px;
-            border-radius: 5px;
-            text-decoration: none;
+        .section-header {
+            font-size: 20px;
             font-weight: 800;
-            font-size: 12px;
-            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            color: var(--avatar-blue);
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 30px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+
+        .horizontal-scroll::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
+
+        .movie-item {
+            flex: 0 0 200px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-item:hover { transform: scale(1.05); }
+
+        .movie-item img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid transparent;
             transition: 0.3s;
         }
 
-        .download-btn:hover { background: white; transform: scale(1.05); }
+        .movie-item:hover img { border-color: var(--avatar-blue); }
+
+        /* --- The "Details from Down" Panel --- */
+        .details-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--card-bg);
+            border-radius: 12px;
+            transition: max-height 0.5s ease, margin-top 0.3s ease;
+            width: 100%;
+            margin-top: 0;
+        }
+
+        /* Show details when the parent movie-item is hovered or focused */
+        .movie-item:hover + .details-panel,
+        .movie-item:active + .details-panel,
+        .details-panel:hover {
+            max-height: 500px;
+            margin-top: 20px;
+            padding: 30px;
+            border: 1px solid #333;
+        }
+
+        .panel-content { display: flex; gap: 30px; }
+        .panel-text h2 { margin-top: 0; color: var(--avatar-blue); }
+        .panel-text p { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+        
+        .btn-download {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: var(--avatar-blue);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 13px;
+        }
 
         @media (max-width: 768px) {
-            .movie-entry { flex-direction: column; align-items: center; text-align: center; }
-            .hero-content h1 { font-size: 3rem; }
+            .panel-content { flex-direction: column; }
+            .hero-content h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -205,74 +165,75 @@
     <nav>
         <a href="#" class="logo">CINE <span>CLOUD</span></a>
         <div class="nav-links">
-            <a href="#video-place">Upcoming</a>
-            <a href="#avatar-collection">Avatar Collection</a>
-            <a href="#action-section">Dubbed</a>
-            <a href="#action-section">Action</a>
+            <a href="#upcoming">Upcoming</a>
+            <a href="#collections">Avatar Collection</a>
+            <a href="#">Dubbed</a>
+            <a href="#">Action</a>
         </div>
     </nav>
 
-    <div id="video-place" class="hero">
+    <div id="upcoming" class="hero">
         <div class="video-background">
-            <iframe 
-                src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY&showinfo=0&rel=0&modestbranding=1" 
-                allow="autoplay; encrypted-media">
-            </iframe>
+            <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY" allow="autoplay"></iframe>
         </div>
         <div class="overlay"></div>
         <div class="hero-content">
             <h1>SPIDER-MAN<br>BRAND NEW DAY</h1>
-            <p class="description">
-                Four years have passed since the events of No Way Home, and Peter is now an adult living entirely alone, having voluntarily erased himself from the lives and memories of those he loves.
-            </p>
         </div>
     </div>
 
-    <div id="avatar-collection" class="collection-section">
-        <div class="section-title">AVATAR COLLECTION</div>
+    <div id="collections" class="collection-container">
+        <div class="section-header">AVATAR COLLECTION</div>
         
-        <div class="collection-grid">
+        <div class="horizontal-scroll">
             
-            <div class="movie-entry">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" class="movie-poster" alt="Avatar 2009">
-                <div class="movie-info">
-                    <h2>Avatar (2009)</h2>
-                    <div class="movie-meta">BluRay | IMDb: 7.9 | 162 min | 26,414 Views</div>
-                    <div class="movie-details">
-                        <strong>Director:</strong> James Cameron, Ana Maria Quintana, and others.<br>
-                        <strong>Country:</strong> United Kingdom, United States<br>
-                        <strong>Year:</strong> 2009<br>
-                        <strong>Language:</strong> English
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <div class="movie-item">
+                    <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" alt="Avatar 2009">
+                </div>
+                <div class="details-panel">
+                    <div class="panel-content">
+                        <div class="panel-text">
+                            <h2>Avatar (2009)</h2>
+                            <p><strong>BluRay IMDb: 7.9</strong> (1.5M) | 162 min | 26414 views<br>
+                               English | Director: James Cameron & Team<br>
+                               Country: UK, USA</p>
+                            <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" class="btn-download">Download 720p</a>
+                        </div>
                     </div>
-                    <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" class="download-btn">Download 720p</a>
                 </div>
             </div>
 
-            <div class="movie-entry">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" class="movie-poster" alt="Avatar 2022">
-                <div class="movie-info">
-                    <h2>Avatar: The Way of Water (2022)</h2>
-                    <div class="movie-meta">BluRay | IMDb: 7.5 | Sinhala Subtitles</div>
-                    <div class="movie-details">
-                        <strong>Director:</strong> James Cameron, Garrett Warren, and others.<br>
-                        <strong>Country:</strong> United States of America<br>
-                        <strong>Year:</strong> 2022
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <div class="movie-item">
+                    <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar 2022">
+                </div>
+                <div class="details-panel">
+                    <div class="panel-content">
+                        <div class="panel-text">
+                            <h2>The Way of Water (2022)</h2>
+                            <p><strong>BluRay IMDb: 7.5</strong> (601.1K) | Sinhala Subtitles<br>
+                               Director: James Cameron & Garrett Warren<br>
+                               Country: USA</p>
+                            <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI" class="btn-download">Download 720p</a>
+                        </div>
                     </div>
-                    <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI" class="download-btn">Download 720p</a>
                 </div>
             </div>
 
-            <div class="movie-entry">
-                <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" class="movie-poster" alt="Avatar 2025">
-                <div class="movie-info">
-                    <h2>Avatar: Fire and Ash (2025)</h2>
-                    <div class="movie-meta">WEB | IMDb: 7.4 | Sinhala Subtitles</div>
-                    <div class="movie-details">
-                        <strong>Director:</strong> James Cameron, Garrett Warren, Richard Bluck.<br>
-                        <strong>Country:</strong> United States of America<br>
-                        <strong>Year:</strong> 2025
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <div class="movie-item">
+                    <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" alt="Avatar 2025">
+                </div>
+                <div class="details-panel">
+                    <div class="panel-content">
+                        <div class="panel-text">
+                            <h2>Fire and Ash (2025)</h2>
+                            <p><strong>WEB IMDb: 7.4</strong> (123.6K) | Sinhala Subtitles<br>
+                               Director: James Cameron, Richard Bluck<br>
+                               Year: 2025 | Status: Upcoming</p>
+                        </div>
                     </div>
-                    <span style="color:var(--text-muted); font-size:12px; display:block; margin-top:15px;">Coming Soon to Cine Cloud</span>
                 </div>
             </div>
 
