@@ -7,14 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
+        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Arial, sans-serif; overflow-x: hidden; }
         .hero-gradient {
             background: linear-gradient(to right, #0f171e 35%, transparent 100%),
                         linear-gradient(to top, #0f171e 5%, transparent 30%);
         }
-        /* Smooth transitions between views */
-        .page-fade { transition: opacity 0.3s ease-in-out; }
+        .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .video-container iframe { width: 300%; height: 100%; margin-left: -100%; }
         .hidden { display: none; }
+        .page-fade { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -27,7 +29,7 @@
             <div class="hidden md:flex space-x-6 text-gray-300 font-medium text-sm">
                 <button onclick="showHome()" class="hover:text-white">Home</button>
                 <button class="hover:text-white">Movies</button>
-                <button class="hover:text-white">TV Shows</button>
+                <button class="hover:text-white">Cinemas</button>
             </div>
         </div>
         <div class="flex items-center space-x-6 text-gray-300">
@@ -37,43 +39,61 @@
     </nav>
 
     <div id="home-view" class="page-fade">
-        <section class="relative h-[80vh] w-full flex items-center">
-            <div class="absolute inset-0 z-0">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" 
-                     class="w-full h-full object-cover object-center" alt="Hero">
-                <div class="absolute inset-0 hero-gradient"></div>
+        <section class="relative h-[85vh] w-full overflow-hidden flex items-center">
+            <div class="video-container z-0 opacity-60">
+                <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY&vq=hd1080" 
+                        frameborder="0" allow="autoplay; encrypted-media"></iframe>
             </div>
-            <div class="relative z-10 px-6 md:px-16 max-w-3xl">
-                <h2 class="text-4xl md:text-6xl font-black italic tracking-tighter mb-2">PIRATES OF THE CARIBBEAN</h2>
-                <p class="text-lg md:text-xl text-gray-300 mb-8">The Curse of the Black Pearl</p>
-                <button onclick="openDetails('black-pearl')" class="bg-white text-black px-10 py-3 rounded-md font-bold hover:bg-gray-200 transition">
-                    Watch Now
-                </button>
+            <div class="absolute inset-0 hero-gradient z-10"></div>
+            
+            <div class="relative z-20 px-6 md:px-16 max-w-3xl">
+                <p class="text-blue-400 font-bold tracking-widest text-xs uppercase mb-2">Exclusive Premiere</p>
+                <h2 class="text-5xl md:text-7xl font-black italic tracking-tighter mb-4">SPIDER-MAN</h2>
+                <p class="text-xl md:text-2xl text-gray-200 mb-6 font-semibold">Brand New Day</p>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed max-w-xl">
+                    Peter Parker faces a world that has forgotten him. Rebirth begins as a friendly neighbor faces threats he can't even see.
+                </p>
+                <div class="flex space-x-4">
+                    <button onclick="openDetails('spider-man')" class="bg-blue-600 text-white px-8 py-3 rounded-md font-bold hover:bg-blue-700 transition">
+                        Movie Info
+                    </button>
+                    <button class="bg-gray-500/30 text-white px-8 py-3 rounded-md font-bold backdrop-blur-md border border-gray-400/30">
+                        Add to List
+                    </button>
+                </div>
             </div>
         </section>
 
-        <section class="px-6 md:px-16 -mt-16 relative z-20 mb-20">
-            <h3 class="text-xl font-bold mb-6 flex items-center text-gray-200">
+        <section class="px-6 md:px-16 -mt-16 relative z-30 pb-20">
+            <h3 class="text-xl font-bold mb-6 flex items-center">
                 <span class="text-blue-400 mr-2">|</span> Pirates of the Caribbean Collection
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div onclick="openDetails('black-pearl')" class="bg-[#1a242f] rounded-lg overflow-hidden group border border-gray-800 hover:border-blue-400 transition-all cursor-pointer">
-                    <div class="relative aspect-video">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div onclick="openDetails('black-pearl')" class="bg-[#1a242f] rounded-lg overflow-hidden border border-gray-800 hover:border-blue-400 transition-all cursor-pointer group">
+                    <div class="aspect-video relative overflow-hidden">
                         <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-2 left-2 bg-blue-600 px-2 py-0.5 rounded text-[10px] font-bold">1080p BLU-RAY</div>
                     </div>
                     <div class="p-4">
-                        <h4 class="font-bold">The Curse of the Black Pearl</h4>
-                        <p class="text-xs text-gray-400 mt-1">2003 | Adventure | Fantasy</p>
+                        <h4 class="font-bold text-lg">The Curse of the Black Pearl</h4>
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>2003 • PG-13</span>
+                            <span>2h 23m</span>
+                        </div>
                     </div>
                 </div>
 
-                <div onclick="openDetails('dead-mans-chest')" class="bg-[#1a242f] rounded-lg overflow-hidden group border border-gray-800 hover:border-blue-400 transition-all cursor-pointer">
-                    <div class="relative aspect-video">
+                <div onclick="openDetails('dead-mans-chest')" class="bg-[#1a242f] rounded-lg overflow-hidden border border-gray-800 hover:border-blue-400 transition-all cursor-pointer group">
+                    <div class="aspect-video relative overflow-hidden">
                         <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-2 left-2 bg-blue-600 px-2 py-0.5 rounded text-[10px] font-bold">1080p HD</div>
                     </div>
                     <div class="p-4">
-                        <h4 class="font-bold">Dead Man's Chest</h4>
-                        <p class="text-xs text-gray-400 mt-1">2006 | Adventure | Action</p>
+                        <h4 class="font-bold text-lg">Dead Man's Chest</h4>
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>2006 • PG-13</span>
+                            <span>2h 31m</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,37 +101,50 @@
     </div>
 
     <div id="details-view" class="page-fade hidden">
-        <div class="px-6 py-4">
-            <button onclick="showHome()" class="text-blue-400 font-bold hover:text-white transition">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Home
+        <div class="p-6">
+            <button onclick="showHome()" class="text-blue-400 font-bold hover:text-white transition flex items-center">
+                <i class="fas fa-chevron-left mr-2"></i> BACK TO CINEMA
             </button>
         </div>
 
-        <main class="relative min-h-screen">
-            <div class="absolute inset-0 z-0 h-[70vh]">
-                <img id="det-bg" src="" class="w-full h-full object-cover opacity-40">
-                <div class="absolute inset-0 detail-gradient"></div>
-            </div>
-
-            <div class="relative z-10 px-6 md:px-20 pt-16 max-w-6xl">
-                <h1 id="det-title" class="text-5xl md:text-7xl font-black italic tracking-tighter mb-2"></h1>
-                <p id="det-subtitle" class="text-2xl text-blue-400 mb-8 font-semibold"></p>
-                
-                <p id="det-desc" class="text-gray-300 text-lg leading-relaxed max-w-3xl mb-10 border-l-4 border-blue-500 pl-6"></p>
-
-                <div class="flex flex-wrap gap-4 mb-16">
-                    <a id="det-link-1080" href="#" class="bg-white text-black px-8 py-3 rounded-md font-bold hover:bg-gray-200">Download Link 1 (1080p)</a>
-                    <a id="det-link-720" href="#" class="bg-gray-700 text-white px-8 py-3 rounded-md font-bold hover:bg-gray-600">Download Link 2 (720p)</a>
+        <main class="px-6 md:px-20 py-10 max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-1">
+                    <img id="det-img" src="" class="w-full rounded-lg shadow-2xl border border-gray-800">
+                    <div class="mt-8 space-y-4">
+                        <h3 class="text-blue-400 font-bold uppercase tracking-widest text-xs">Technical Specs</h3>
+                        <div id="det-specs" class="bg-[#1a242f] p-6 rounded-lg space-y-3 text-sm text-gray-400 border border-gray-800"></div>
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12 border-t border-gray-800 pt-10 pb-20">
-                    <div>
-                        <h3 class="text-blue-400 uppercase tracking-widest text-sm font-bold mb-6">The Crew</h3>
-                        <div id="det-cast" class="grid grid-cols-2 gap-y-3 text-gray-300"></div>
+                <div class="lg:col-span-2">
+                    <h1 id="det-title" class="text-5xl md:text-6xl font-black italic tracking-tighter mb-2"></h1>
+                    <h2 id="det-subtitle" class="text-xl text-gray-400 mb-8"></h2>
+                    
+                    <div class="flex gap-3 mb-10 overflow-x-auto pb-2">
+                        <span class="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">DOLBY ATMOS</span>
+                        <span class="bg-gray-800 text-gray-300 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap">4K DIGITAL PROJECTION</span>
+                        <span id="det-year" class="bg-gray-800 text-gray-300 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap"></span>
                     </div>
-                    <div>
-                        <h3 class="text-blue-400 uppercase tracking-widest text-sm font-bold mb-6">Technical Specifications</h3>
-                        <div id="det-specs" class="space-y-3 text-sm text-gray-400"></div>
+
+                    <div class="space-y-6">
+                        <h3 class="text-white text-xl font-bold border-b border-gray-800 pb-2">Synopsis</h3>
+                        <p id="det-desc" class="text-gray-300 text-lg leading-relaxed"></p>
+                    </div>
+
+                    <div class="mt-12">
+                        <h3 class="text-white text-xl font-bold border-b border-gray-800 pb-2 mb-6">Downloads</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <a id="det-l1080" href="#" class="bg-white text-black px-8 py-3 rounded font-bold hover:bg-blue-400 hover:text-white transition">DOWNLOAD 1080p</a>
+                            <a id="det-l720" href="#" class="bg-gray-800 text-white px-8 py-3 rounded font-bold hover:bg-gray-700 transition">DOWNLOAD 720p</a>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4">The Crew</h3>
+                            <div id="det-cast" class="space-y-2 text-gray-400 text-sm"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,23 +153,36 @@
 
     <script>
         const movieDb = {
+            'spider-man': {
+                title: "SPIDER-MAN: BRAND NEW DAY",
+                subtitle: "Rebirth and Responsibility",
+                img: "https://i.ytimg.com/vi/8TZMtslA3UY/maxresdefault.jpg",
+                desc: "Spiders have three life cycles. When between cycles, it can leave the spider vulnerable to threats. After the world forgot Peter Parker, he must navigate a dangerous new mutation of DNA. Peter Parker is no longer just a kid; he is a friendly neighbor facing a rebirth he can't control.",
+                year: "2026",
+                cast: ["Peter Parker (Spider-Man)", "Dr. Bruce Banner", "MJ", "Ned Leeds"],
+                specs: {"Cinema": "KCC Multiplex C1", "Sound": "Dolby Atmos", "Projection": "4K Digital", "Runtime": "2h 22m"},
+                l1080: "https://youtu.be/8TZMtslA3UY",
+                l720: "https://youtu.be/8TZMtslA3UY"
+            },
             'black-pearl': {
                 title: "PIRATES OF THE CARIBBEAN",
-                subtitle: "The Curse of the Black Pearl (2003)",
-                bg: "https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ",
-                desc: "In the 18th century Caribbean, blacksmith Will Turner teams up with eccentric pirate Captain Jack Sparrow to save Elizabeth Swann from the cursed crew of the Black Pearl. The crew, led by the treacherous Captain Barbossa, are under an ancient Aztec curse.",
-                cast: ["Johnny Depp", "Orlando Bloom", "Keira Knightley", "Geoffrey Rush"],
-                specs: {"Quality": "1080p Blu-ray", "Audio": "Dolby Digital 5.1", "Runtime": "143 minutes", "IMDb": "7.8/10"},
+                subtitle: "The Curse of the Black Pearl",
+                img: "https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ",
+                desc: "18th century Caribbean blacksmith Will Turner teams up with eccentric pirate Captain Jack Sparrow to save the governor's daughter from a cursed crew of immortal skeletons led by Captain Barbossa.",
+                year: "2003",
+                cast: ["Johnny Depp (Jack Sparrow)", "Orlando Bloom (Will Turner)", "Keira Knightley", "Geoffrey Rush"],
+                specs: {"Cinema": "KCC Multiplex C1", "Sound": "Dolby Atmos", "Quality": "1080p Blu-ray", "Runtime": "2h 23m"},
                 l1080: "https://pixeldrain.com/u/AyChGtcW",
                 l720: "https://pixeldrain.com/u/AyChGtcW"
             },
             'dead-mans-chest': {
                 title: "PIRATES OF THE CARIBBEAN",
-                subtitle: "Dead Man's Chest (2006)",
-                bg: "https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc",
-                desc: "Captain Jack Sparrow finds himself in debt to the legendary Davy Jones, captain of the ghostly Flying Dutchman. With a cursed chest at stake and Will Turner and Elizabeth Swann caught in the middle, this adventure takes pirates to new depths of danger.",
-                cast: ["Johnny Depp", "Orlando Bloom", "Keira Knightley", "Bill Nighy"],
-                specs: {"Quality": "1080p HD", "Audio": "5.1 Surround", "Runtime": "151 minutes", "Visuals": "Academy Award Winner"},
+                subtitle: "Dead Man's Chest",
+                img: "https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc",
+                desc: "Captain Jack Sparrow owes a blood debt to the legendary Davy Jones, master of the ocean depths. A race begins to find the Dead Man's Chest containing Jones' still-beating heart.",
+                year: "2006",
+                cast: ["Johnny Depp", "Orlando Bloom", "Bill Nighy (Davy Jones)", "Stellan Skarsgård"],
+                specs: {"Cinema": "KCC Multiplex C2", "Sound": "Dolby 7.1", "Visuals": "Oscar Winner", "Runtime": "2h 31m"},
                 l1080: "https://pixeldrain.com/u/rRsAELaH",
                 l720: "https://pixeldrain.com/u/rRsAELaH"
             }
@@ -150,31 +196,24 @@
 
         function openDetails(id) {
             const data = movieDb[id];
-            if (!data) return;
-
-            // Update Details View
             document.getElementById('det-title').innerText = data.title;
             document.getElementById('det-subtitle').innerText = data.subtitle;
-            document.getElementById('det-bg').src = data.bg;
+            document.getElementById('det-img').src = data.img;
             document.getElementById('det-desc').innerText = data.desc;
-            document.getElementById('det-link-1080').href = data.l1080;
-            document.getElementById('det-link-720').href = data.l720;
+            document.getElementById('det-year').innerText = data.year;
+            document.getElementById('det-l1080').href = data.l1080;
+            document.getElementById('det-l720').href = data.l720;
 
-            // Update Cast
             const castDiv = document.getElementById('det-cast');
             castDiv.innerHTML = "";
-            data.cast.forEach(c => {
-                castDiv.innerHTML += `<p class="border-b border-gray-800 pb-2">${c}</p>`;
-            });
+            data.cast.forEach(c => castDiv.innerHTML += `<p class="border-b border-gray-800 pb-1">${c}</p>`);
 
-            // Update Specs
             const specDiv = document.getElementById('det-specs');
             specDiv.innerHTML = "";
-            for (const [key, val] of Object.entries(data.specs)) {
-                specDiv.innerHTML += `<div class="flex justify-between border-b border-gray-800 pb-1"><span>${key}</span><span class="text-white">${val}</span></div>`;
+            for (const [k, v] of Object.entries(data.specs)) {
+                specDiv.innerHTML += `<div class="flex justify-between border-b border-gray-800 pb-1"><span>${k}</span><span class="text-white">${v}</span></div>`;
             }
 
-            // Swap Views
             document.getElementById('home-view').classList.add('hidden');
             document.getElementById('details-view').classList.remove('hidden');
             window.scrollTo(0, 0);
