@@ -3,204 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLICKS MOVIES | Spider-Man: Brand New Day</title>
+    <title>FLICKS CINEMA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@300;400&family=Permanent+Marker&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Roboto', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section with Background */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.2)), 
-                        url('https://images.alphacoders.com/133/1338450.jpeg'); /* Placeholder for Miles/Spider-man style */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Navbar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 8%;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #bbb;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #e62429;
-        }
-
-        /* Content Area */
-        .content {
-            margin-top: auto;
-            margin-bottom: auto;
-            padding: 0 8%;
-            max-width: 800px;
-        }
-
-        h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 5rem;
-            text-transform: uppercase;
-            line-height: 0.9;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 3rem;
-            color: #e62429;
-            margin-bottom: 20px;
-            transform: rotate(-2deg);
-            display: inline-block;
-        }
-
-        .description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #ccc;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 12px 35px;
-            border: 2px solid #e62429;
-            text-transform: uppercase;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: #e62429;
-            color: #fff;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #fff;
-        }
-
-        .btn:hover {
-            background: #fff;
-            border-color: #fff;
-            color: #000;
-        }
-
-        /* Social Icons */
-        .socials {
-            position: absolute;
-            right: 8%;
-            top: 40px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .socials img {
-            width: 20px;
-            filter: invert(1);
-            opacity: 0.7;
-        }
-
-        /* Footer logos */
-        .footer-branding {
-            margin-top: 40px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            opacity: 0.6;
-        }
-
-        .footer-branding img {
-            height: 25px;
+        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(to right, #0f171e 30%, transparent 100%),
+                        linear-gradient(to top, #0f171e 10%, transparent 40%);
         }
     </style>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-    <section class="hero">
-        <nav>
-            <div class="logo">FLICKS MOVIES</div>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Story</a></li>
-                <li><a href="#">Wallpapers</a></li>
-                <li style="color: #e62429;">#BEYOURSELF</li>
-            </ul>
-        </nav>
+    <nav class="flex items-center justify-between px-10 py-4 bg-[#0f171e]/90 sticky top-0 z-50">
+        <div class="flex items-center space-x-8">
+            <h1 class="text-2xl font-bold tracking-tighter text-white">FLICKS <span class="text-blue-400">CINEMA</span></h1>
+            <div class="hidden md:flex space-x-6 text-gray-300 font-medium text-sm">
+                <a href="#" class="text-white border-b-2 border-white pb-1">Home</a>
+                <a href="#" class="hover:text-white transition">Movies</a>
+                <a href="#" class="hover:text-white transition">TV shows</a>
+                <a href="#" class="hover:text-white transition">Sports</a>
+                <a href="#" class="hover:text-white transition">Live TV</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-6 text-gray-300">
+            <i class="fas fa-search cursor-pointer hover:text-white"></i>
+            <i class="fas fa-th-large cursor-pointer hover:text-white"></i>
+            <i class="fas fa-user-circle text-2xl cursor-pointer hover:text-white"></i>
+        </div>
+    </nav>
 
-        <div class="socials">
-            <span style="color:white; font-size: 14px;">FB</span>
-            <span style="color:white; font-size: 14px;">IG</span>
-            <span style="color:white; font-size: 14px;">YT</span>
-            <span style="color:white; font-size: 14px;">X</span>
+    <section class="relative h-[85vh] w-full flex items-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                 class="w-full h-full object-cover object-top" alt="Hero Background">
+            <div class="absolute inset-0 hero-gradient"></div>
         </div>
 
-        <div class="content">
-            <h1>SPIDER-MAN</h1>
-            <div class="subtitle">Brand New Day</div>
-            
-            <p class="description">
-                Four years have passed since the events of No Way Home, and Peter is now an adult living entirely alone, 
-                having voluntarily erased himself from the lives and memories of those he loves. Crime-fighting in a New York 
-                that no longer knows his name, he's devoted himself entirely to protecting his city — a full-time Spider-Man. 
-                But as the demands on him intensify, the pressure sparks a surprising physical evolution that threatens his existence.
+        <div class="relative z-10 px-16 max-w-2xl">
+            <p class="text-blue-400 font-bold mb-2 tracking-widest text-xs uppercase">Original Series</p>
+            <h2 class="text-5xl font-black italic tracking-tighter mb-4">THE RINGS OF POWER</h2>
+            <p class="text-lg text-gray-200 mb-2 font-semibold">New Season</p>
+            <p class="text-gray-400 text-md mb-8 leading-relaxed">
+                Sauron has returned. Cast out by Galadriel, the Dark Lord must rely on his own cunning to forge the Rings of Power.
             </p>
-
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">Book Tickets</a>
-                <a href="#" class="btn btn-outline">Watch the Teaser</a>
+            
+            <div class="flex space-x-4">
+                <button class="bg-white text-black px-8 py-3 rounded-md font-bold flex items-center hover:bg-gray-200 transition">
+                    <i class="fas fa-play mr-3"></i> Play S2 E1
+                </button>
+                <button class="bg-gray-500/40 text-white px-8 py-3 rounded-md font-bold flex items-center hover:bg-gray-500/60 transition backdrop-blur-md">
+                    <i class="fas fa-info-circle mr-3"></i> More details
+                </button>
             </div>
+            <p class="mt-6 text-sm text-gray-400 flex items-center">
+                <i class="fas fa-check-circle text-blue-400 mr-2"></i> Included with Flicks Plus
+            </p>
+        </div>
+    </section>
 
-            <div class="footer-branding">
-                <span style="font-weight: bold; font-size: 1.2rem;">KCC MULTIPLEX</span>
-                <span style="border-left: 1px solid #555; padding-left: 15px; font-size: 0.8rem;">RELEASE DATE: JULY 31, 2026</span>
+    <section class="px-16 -mt-20 relative z-20 pb-20">
+        <h3 class="text-xl font-bold mb-4">Flicks movies</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div class="group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80" 
+                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
+                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">The Idea of You</p>
+            </div>
+            <div class="group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=400&q=80" 
+                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
+                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">Road House</p>
+            </div>
+            <div class="group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" 
+                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
+                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">My Fault</p>
+            </div>
+            <div class="group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?auto=format&fit=crop&w=400&q=80" 
+                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
+                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">Jackpot!</p>
+            </div>
+            <div class="group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=400&q=80" 
+                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
+                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">The Boys</p>
             </div>
         </div>
     </section>
