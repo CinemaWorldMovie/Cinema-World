@@ -7,32 +7,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Arial, sans-serif; overflow-x: hidden; }
+        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Arial, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* Cinematic Overlays */
         .hero-gradient {
             background: linear-gradient(to right, #0f171e 30%, transparent 100%),
                         linear-gradient(to top, #0f171e 10%, transparent 40%);
         }
 
-        /* The Big Screen Video Logic */
         .video-wrapper { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            pointer-events: none;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            pointer-events: none; overflow: hidden;
         }
 
-        /* Stretches video to fill screen and makes it "Big" */
         .video-wrapper iframe { 
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 115vw; 
-            height: 115vh; 
+            position: absolute; top: 50%; left: 50%;
+            width: 115vw; height: 115vh; 
             transform: translate(-50%, -50%);
             object-fit: cover;
         }
@@ -41,15 +30,11 @@
         .page-fade { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* Form Styling */
         input, select, textarea { 
             background-color: #1a242f !important; 
             border: 1px solid #334155 !important;
             color: white !important;
             outline: none;
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color: #3b82f6 !important;
         }
     </style>
 </head>
@@ -61,13 +46,12 @@
                 FLICKS <span class="text-blue-400">CINEMA</span>
             </h1>
             <div class="hidden md:flex space-x-6 text-gray-300 font-medium text-sm">
-                <button onclick="showView('home-view')" class="hover:text-white transition">Home</button>
-                <button class="hover:text-white transition">Movies</button>
-                <button class="hover:text-white transition">Collections</button>
+                <button onclick="navToSection('movies-section')" class="hover:text-white transition uppercase tracking-widest text-xs font-bold">Movies</button>
+                <button onclick="navToSection('upcoming-section')" class="hover:text-white transition uppercase tracking-widest text-xs font-bold">Upcoming</button>
             </div>
         </div>
         <div class="flex items-center space-x-6 text-gray-300">
-            <i class="fas fa-search cursor-pointer hover:text-white transition"></i>
+            <i class="fas fa-search cursor-pointer hover:text-white"></i>
             <i class="fas fa-user-circle text-2xl cursor-pointer hover:text-white transition" onclick="showView('profile-view')"></i>
         </div>
     </nav>
@@ -81,58 +65,61 @@
             <div class="absolute inset-0 hero-gradient z-10"></div>
             
             <div class="relative z-20 px-6 md:px-16 max-w-4xl">
-                <p class="text-blue-400 font-bold tracking-widest text-sm uppercase mb-3">Exclusive Premiere</p>
+                <p class="text-blue-400 font-bold tracking-widest text-sm uppercase mb-3">Featured Premiere</p>
                 <h2 class="text-6xl md:text-8xl font-black italic tracking-tighter mb-4 leading-tight">SPIDER-MAN</h2>
-                <p class="text-2xl md:text-3xl text-gray-200 mb-8 font-semibold">Brand New Day</p>
-                <p class="text-gray-300 text-xl mb-10 leading-relaxed max-w-2xl">
-                    Peter Parker faces a world that has forgotten him. Rebirth begins as a friendly neighbor faces threats he can't even see.
-                </p>
+                <p class="text-2xl md:text-3xl text-gray-200 mb-8 font-semibold uppercase tracking-widest">Brand New Day</p>
                 <button onclick="openDetails('spider-man')" class="bg-blue-600 text-white px-12 py-4 rounded-md font-bold text-lg hover:bg-blue-700 transition shadow-2xl">
                     MOVIE INFO
                 </button>
             </div>
         </section>
 
-        <section class="px-6 md:px-16 -mt-20 relative z-30 pb-20">
-            <h3 class="text-2xl font-bold mb-8 flex items-center"><span class="text-blue-400 mr-3">|</span> Pirates of the Caribbean Collection</h3>
+        <section id="movies-section" class="px-6 md:px-16 -mt-20 relative z-30 pb-16">
+            <h3 class="text-xl font-bold mb-6 flex items-center uppercase tracking-tighter"><span class="text-blue-400 mr-3">|</span> Pirates Collection</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div onclick="openDetails('black-pearl')" class="bg-[#1a242f] rounded-lg overflow-hidden border border-gray-800 hover:border-blue-400 transition-all cursor-pointer group">
                     <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
-                    <div class="p-5"><h4 class="font-bold text-lg">The Curse of the Black Pearl</h4></div>
+                    <div class="p-5 font-bold text-lg text-gray-200">The Curse of the Black Pearl</div>
                 </div>
                 <div onclick="openDetails('dead-mans-chest')" class="bg-[#1a242f] rounded-lg overflow-hidden border border-gray-800 hover:border-blue-400 transition-all cursor-pointer group">
                     <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
-                    <div class="p-5"><h4 class="font-bold text-lg">Dead Man's Chest</h4></div>
+                    <div class="p-5 font-bold text-lg text-gray-200">Dead Man's Chest</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="upcoming-section" class="px-6 md:px-16 py-20 relative z-30 border-t border-gray-800 bg-[#0b1115]">
+            <h3 class="text-xl font-bold mb-8 flex items-center uppercase tracking-tighter"><span class="text-blue-400 mr-3">|</span> Upcoming Releases</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openDetails('spider-man')" class="bg-[#1a242f] rounded-lg overflow-hidden border border-gray-800 hover:border-blue-400 transition-all cursor-pointer group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://i.ytimg.com/vi/8TZMtslA3UY/maxresdefault.jpg" class="w-full aspect-[2/3] object-cover group-hover:scale-105 transition duration-500 opacity-60">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="bg-blue-600/80 text-white px-4 py-1 text-xs font-bold uppercase tracking-widest rounded">Coming 2026</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-sm">Spider-Man: Brand New Day</h4>
+                        <p class="text-xs text-gray-500 mt-1 uppercase tracking-tighter">Action / Adventure</p>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
     <div id="details-view" class="view-container page-fade hidden">
-        <div class="p-6">
-            <button onclick="showView('home-view')" class="text-blue-400 font-bold hover:text-white transition flex items-center">
-                <i class="fas fa-chevron-left mr-2"></i> BACK TO BROWSE
-            </button>
-        </div>
+        <div class="p-6"><button onclick="showView('home-view')" class="text-blue-400 font-bold hover:text-white transition flex items-center"><i class="fas fa-chevron-left mr-2"></i> BACK</button></div>
         <main class="px-6 md:px-20 py-10 max-w-7xl mx-auto grid lg:grid-cols-3 gap-12">
-            <div class="lg:col-span-1">
-                <img id="det-img" src="" class="w-full rounded-lg shadow-2xl border border-gray-800">
-            </div>
+            <div class="lg:col-span-1"><img id="det-img" src="" class="w-full rounded-lg shadow-2xl border border-gray-800"></div>
             <div class="lg:col-span-2">
-                <h1 id="det-title" class="text-5xl md:text-7xl font-black italic tracking-tighter mb-2"></h1>
+                <h1 id="det-title" class="text-5xl md:text-7xl font-black italic mb-2 tracking-tighter"></h1>
                 <h2 id="det-subtitle" class="text-xl text-gray-400 mb-8 font-semibold"></h2>
-                <div class="flex gap-3 mb-10">
-                    <span id="det-year" class="bg-gray-800 text-gray-300 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest"></span>
-                </div>
-                <h3 class="text-white text-xl font-bold border-b border-gray-800 pb-2">Synopsis</h3>
+                <div class="flex gap-3 mb-10"><span id="det-year" class="bg-gray-800 text-gray-300 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest"></span></div>
+                <h3 class="text-white text-xl font-bold border-b border-gray-800 pb-2 uppercase tracking-tighter">Synopsis</h3>
                 <p id="det-desc" class="text-gray-300 text-lg leading-relaxed mt-4"></p>
-                
                 <div id="download-section" class="mt-12">
-                    <h3 class="text-white text-xl font-bold border-b border-gray-800 pb-2 mb-6">Available Downloads</h3>
-                    <div class="flex gap-4">
-                        <a id="det-l1080" href="#" class="bg-white text-black px-8 py-3 rounded font-bold hover:bg-blue-400 hover:text-white transition">DOWNLOAD 1080p</a>
-                        <a id="det-l720" href="#" class="bg-gray-800 text-white px-8 py-3 rounded font-bold hover:bg-gray-700 transition">DOWNLOAD 720p</a>
-                    </div>
+                    <h3 class="text-white text-xl font-bold border-b border-gray-800 pb-2 mb-6 uppercase tracking-tighter">Available Downloads</h3>
+                    <div class="flex gap-4"><a id="det-l1080" href="#" class="bg-white text-black px-8 py-3 rounded font-bold hover:bg-blue-400 hover:text-white transition">DOWNLOAD 1080p</a><a id="det-l720" href="#" class="bg-gray-800 text-white px-8 py-3 rounded font-bold hover:bg-gray-700 transition">DOWNLOAD 720p</a></div>
                 </div>
             </div>
         </main>
@@ -142,95 +129,67 @@
         <div class="max-w-4xl mx-auto px-6 py-12">
             <h2 class="text-3xl font-black italic mb-8 border-b border-blue-500 pb-2 inline-block uppercase tracking-tighter">Account Profile</h2>
             <div class="grid md:grid-cols-2 gap-6 mb-16">
-                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Full Name</label><input type="text" class="w-full p-3 rounded" value="John Doe"></div>
-                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Username</label><input type="text" class="w-full p-3 rounded" value="johndoe_flicks"></div>
-                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Email Address</label><input type="email" class="w-full p-3 rounded" value="john@example.com"></div>
-                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Contact Number</label><input type="text" class="w-full p-3 rounded" value="+1 234 567 890"></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Full Name</label><input type="text" class="w-full p-3 rounded" value="Guest User"></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Username</label><input type="text" class="w-full p-3 rounded" value="guest_flicks"></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Email Address</label><input type="email" class="w-full p-3 rounded" placeholder="Email Address"></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-gray-500 uppercase">Contact Number</label><input type="text" class="w-full p-3 rounded" placeholder="Number"></div>
             </div>
 
             <h2 class="text-3xl font-black italic mb-8 border-b border-blue-500 pb-2 inline-block uppercase tracking-tighter">Movie Request Form</h2>
-            <form class="bg-[#1a242f]/50 p-8 rounded-lg border border-gray-800 space-y-6 shadow-2xl">
-                <div class="space-y-2">
-                    <label class="font-bold text-sm">Movie Name</label>
-                    <input type="text" placeholder="Enter movie title..." class="w-full p-3 rounded">
-                </div>
+            <form class="bg-[#1a242f]/50 p-8 rounded-lg border border-gray-800 space-y-6">
+                <div class="space-y-2"><label class="font-bold text-sm">Movie Name</label><input type="text" placeholder="Title..." class="w-full p-3 rounded"></div>
                 <div class="space-y-2">
                     <label class="font-bold text-sm">Format Preference</label>
                     <select class="w-full p-3 rounded cursor-pointer">
                         <option>English Subtitles</option>
                         <option>Dubbed Audio</option>
-                        <option>Original Audio</option>
                     </select>
                 </div>
-                <div class="space-y-2">
-                    <label class="font-bold text-sm">Additional Note</label>
-                    <textarea placeholder="Specify year, version, or language..." class="w-full p-3 rounded h-32"></textarea>
-                </div>
-                <button type="button" onclick="alert('Request Sent to Team!')" class="bg-blue-600 text-white px-10 py-3 rounded font-bold hover:bg-blue-700 transition w-full md:w-auto">SUBMIT REQUEST</button>
+                <div class="space-y-2"><label class="font-bold text-sm">Note</label><textarea placeholder="Specify details..." class="w-full p-3 rounded h-32"></textarea></div>
+                <button type="button" onclick="alert('Request Sent!')" class="bg-blue-600 text-white px-10 py-3 rounded font-bold hover:bg-blue-700 transition">SUBMIT REQUEST</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Database of Movies
         const movieDb = {
-            'spider-man': { 
-                title: "SPIDER-MAN: BRAND NEW DAY", 
-                subtitle: "Rebirth and Responsibility", 
-                img: "https://i.ytimg.com/vi/8TZMtslA3UY/maxresdefault.jpg", 
-                desc: "Spiders have three life cycles. When between cycles, it can leave the spider vulnerable to threats. After the world forgot Peter Parker, he must navigate a dangerous new mutation of DNA. Peter Parker is no longer just a kid; he is a friendly neighbor facing a rebirth he can't control.", 
-                year: "2026", 
-                hasDownload: false 
-            },
-            'black-pearl': { 
-                title: "PIRATES OF THE CARIBBEAN", 
-                subtitle: "The Curse of the Black Pearl", 
-                img: "https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ", 
-                desc: "In the 18th century Caribbean, blacksmith Will Turner teams up with eccentric pirate Captain Jack Sparrow to save the governor's daughter from a cursed crew of immortal skeletons.", 
-                year: "2003", 
-                hasDownload: true, 
-                l1080: "https://pixeldrain.com/u/AyChGtcW", 
-                l720: "https://pixeldrain.com/u/AyChGtcW" 
-            },
-            'dead-mans-chest': { 
-                title: "PIRATES OF THE CARIBBEAN", 
-                subtitle: "Dead Man's Chest", 
-                img: "https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc", 
-                desc: "Captain Jack Sparrow owes a blood debt to the legendary Davy Jones, master of the ocean depths. A race begins to find the Dead Man's Chest containing Jones' still-beating heart.", 
-                year: "2006", 
-                hasDownload: true, 
-                l1080: "https://pixeldrain.com/u/rRsAELaH", 
-                l720: "https://pixeldrain.com/u/rRsAELaH" 
-            }
+            'spider-man': { title: "SPIDER-MAN: BRAND NEW DAY", subtitle: "Rebirth and Responsibility", img: "https://i.ytimg.com/vi/8TZMtslA3UY/maxresdefault.jpg", desc: "Peter Parker faces a world that has forgotten him. Rebirth begins as a friendly neighbor faces threats he can't even see.", year: "UPCOMING 2026", hasDownload: false },
+            'black-pearl': { title: "PIRATES OF THE CARIBBEAN", subtitle: "The Curse of the Black Pearl", img: "https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ", desc: "18th century Caribbean blacksmith Will Turner teams up with eccentric pirate Captain Jack Sparrow to save the governor's daughter from a cursed crew.", year: "2003", hasDownload: true, l1080: "https://pixeldrain.com/u/AyChGtcW", l720: "https://pixeldrain.com/u/AyChGtcW" },
+            'dead-mans-chest': { title: "PIRATES OF THE CARIBBEAN", subtitle: "Dead Man's Chest", img: "https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc", desc: "Captain Jack Sparrow owes a blood debt to the legendary Davy Jones. A race begins to find the Dead Man's Chest containing Jones' still-beating heart.", year: "2006", hasDownload: true, l1080: "https://pixeldrain.com/u/rRsAELaH", l720: "https://pixeldrain.com/u/rRsAELaH" }
         };
 
-        // Navigation Function
         function showView(viewId) {
             document.querySelectorAll('.view-container').forEach(v => v.classList.add('hidden'));
             document.getElementById(viewId).classList.remove('hidden');
-            window.scrollTo(0, 0);
+            if(viewId === 'home-view') window.scrollTo(0,0);
         }
 
-        // Open Movie Detail Function
+        function navToSection(sectionId) {
+            // If not on home page, go home first
+            if (document.getElementById('home-view').classList.contains('hidden')) {
+                showView('home-view');
+            }
+            // Smooth scroll to the section
+            setTimeout(() => {
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
         function openDetails(id) {
             const data = movieDb[id];
-            if (!data) return;
-
             document.getElementById('det-title').innerText = data.title;
             document.getElementById('det-subtitle').innerText = data.subtitle;
             document.getElementById('det-img').src = data.img;
             document.getElementById('det-desc').innerText = data.desc;
             document.getElementById('det-year').innerText = data.year;
-            
             const dlSection = document.getElementById('download-section');
             if (data.hasDownload) {
                 dlSection.classList.remove('hidden');
                 document.getElementById('det-l1080').href = data.l1080;
                 document.getElementById('det-l720').href = data.l720;
-            } else {
-                dlSection.classList.add('hidden');
-            }
+            } else { dlSection.classList.add('hidden'); }
             showView('details-view');
+            window.scrollTo(0,0);
         }
     </script>
 </body>
