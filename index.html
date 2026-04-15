@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLICKS CINEMA | Spider-Man</title>
+    <title>FLICKS CINEMA | Collections</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -38,14 +38,13 @@
         .logo { font-size: 24px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
         .logo span { color: var(--accent-purple); }
 
-        nav ul { display: flex; list-style: none; gap: 35px; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
         nav ul li a { 
             font-size: 13px; font-weight: 600; color: var(--text-dim); 
             text-decoration: none; text-transform: uppercase; transition: 0.3s;
         }
         nav ul li a:hover { color: #fff; }
 
-        /* Hero Video Section */
         .hero {
             position: relative;
             height: 100vh;
@@ -72,25 +71,9 @@
         .hero-content { max-width: 750px; z-index: 3; position: relative; }
         .hero-content h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 900; line-height: 1.1; text-transform: uppercase; }
         .hero-content h1 span { display: block; font-size: 0.55em; letter-spacing: 6px; font-weight: 300; margin-top: 5px; color: var(--accent-purple); }
-        
-        .hero-desc {
-            margin-top: 25px;
-            color: var(--text-dim);
-            font-size: 15px;
-            line-height: 1.6;
-            max-width: 600px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        .hero-desc { margin-top: 25px; color: var(--text-dim); font-size: 15px; line-height: 1.6; max-width: 600px; }
+        .hero-meta { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; letter-spacing: 1px; }
 
-        .hero-meta {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        /* Movie Sections */
         .container { padding: 80px 4% 20px 4%; }
         .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
         .section-header h2 { font-size: 22px; text-transform: uppercase; letter-spacing: 2px; color: #fff; }
@@ -98,7 +81,7 @@
 
         .collection-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
 
@@ -108,28 +91,27 @@
             overflow: hidden;
             transition: 0.4s ease;
             border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
         }
 
         .movie-card:hover { transform: translateY(-10px); border-color: var(--accent-purple); }
-        .movie-img { width: 100%; height: 450px; object-fit: cover; }
-        .movie-info { padding: 25px; }
-        .movie-info h3 { font-size: 20px; margin-bottom: 10px; }
+        .movie-img { width: 100%; height: 250px; object-fit: cover; }
+        .movie-info { padding: 25px; flex-grow: 1; }
+        .movie-info h3 { font-size: 20px; margin-bottom: 10px; text-transform: uppercase; }
         .meta-tag { font-size: 12px; color: var(--accent-purple); font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
         .summary { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
-
+        
+        .dl-section { display: flex; gap: 10px; margin-top: auto; }
         .dl-btn {
-            display: inline-block; width: 100%; padding: 12px;
-            background: var(--accent-purple); color: white;
+            flex: 1; padding: 12px; background: var(--accent-purple); color: white;
             text-align: center; text-decoration: none; border-radius: 8px;
-            font-weight: bold; font-size: 14px; transition: 0.3s;
+            font-weight: bold; font-size: 12px; transition: 0.3s;
         }
         .dl-btn:hover { background: #9d4edd; }
+        .dl-btn.secondary { background: #333; }
 
-        .upcoming-label {
-            background: #e50914; color: white; padding: 4px 10px;
-            font-size: 11px; border-radius: 4px; margin-left: 10px; vertical-align: middle;
-        }
-
+        .upcoming-label { background: #e50914; color: white; padding: 4px 10px; font-size: 11px; border-radius: 4px; margin-left: 10px; vertical-align: middle; }
     </style>
 </head>
 <body id="home">
@@ -139,8 +121,8 @@
         <nav>
             <ul>
                 <li><a href="#home">HOME</a></li>
-                <li><a href="#movies">MOVIES</a></li>
-                <li><a href="#dubbed">DUBBED</a></li>
+                <li><a href="#pirates">PIRATES</a></li>
+                <li><a href="#movies">AVATAR</a></li>
                 <li><a href="#upcoming">UPCOMING</a></li>
             </ul>
         </nav>
@@ -153,42 +135,69 @@
                 <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
             </div>
             <div class="hero-overlay"></div>
-            
             <div class="hero-content">
                 <div class="hero-meta">MARVEL STUDIOS | 2H 22M | PG | JULY 31, 2026</div>
                 <h1>SPIDER - MAN<span>BRAND NEW DAY</span></h1>
-                <p class="hero-desc">
-                    Four years after the world forgot Peter Parker, he is a full-time Spider-Man in a city that no longer knows his name. 
-                    As his powers begin a surprising physical evolution, he must face a dangerous new threat that challenges everything 
-                    he has left to lose.
-                </p>
+                <p class="hero-desc">Four years after the world forgot Peter Parker, he is a full-time Spider-Man in a city that no longer knows his name. As his powers begin a surprising physical evolution, he must face a dangerous new threat.</p>
             </div>
         </section>
 
-        <section class="container" id="movies">
-            <div id="dubbed"></div>
+        <section class="container" id="pirates">
             <div class="section-header">
-                <h2>Avatar Collection</h2>
+                <h2>Pirates of the Caribbean</h2>
                 <div class="line"></div>
             </div>
 
             <div class="collection-grid">
                 <div class="movie-card">
-                    <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" class="movie-img">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ=w480-h270-p-k-no-nu" class="movie-img">
                     <div class="movie-info">
-                        <div class="meta-tag">IMDb: 7.9 | 162 Min | 2009</div>
-                        <h3>Avatar</h3>
-                        <p class="summary">Director: James Cameron. A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following orders and protecting the world he feels is his home.</p>
-                        <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" class="dl-btn">DOWNLOAD 720P</a>
+                        <div class="meta-tag">2003 | Adventure Fantasy Action | 143 Min</div>
+                        <h3>The Curse of the Black Pearl</h3>
+                        <p class="summary">Blacksmith Will Turner teams up with eccentric pirate Captain Jack Sparrow to save Elizabeth Swann from the cursed crew of the Black Pearl, led by Captain Barbossa.</p>
+                        <div class="dl-section">
+                            <a href="https://pixeldrain.com/u/AyChGtcW" class="dl-btn">1080P HD</a>
+                            <a href="https://pixeldrain.com/u/AyChGtcW" class="dl-btn secondary">720P HD</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="movie-card">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc" class="movie-img">
+                    <div class="movie-info">
+                        <div class="meta-tag">2006 | Adventure Fantasy Action | 151 Min</div>
+                        <h3>Dead Man's Chest</h3>
+                        <p class="summary">Jack Sparrow finds himself in debt to the legendary Davy Jones. With a cursed chest at stake, Will Turner and Elizabeth Swann are caught in the middle of a dangerous chase.</p>
+                        <div class="dl-section">
+                            <a href="https://pixeldrain.com/u/rRsAELaH" class="dl-btn">1080P HD</a>
+                            <a href="https://pixeldrain.com/u/rRsAELaH" class="dl-btn secondary">720P HD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="movies">
+            <div class="section-header">
+                <h2>Avatar Collection</h2>
+                <div class="line"></div>
+            </div>
+            <div class="collection-grid">
+                <div class="movie-card">
+                    <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" class="movie-img">
+                    <div class="movie-info">
+                        <div class="meta-tag">IMDb: 7.9 | 2009</div>
+                        <h3>Avatar</h3>
+                        <p class="summary">A paraplegic Marine dispatched to the moon Pandora becomes torn between following orders and protecting the world he feels is his home.</p>
+                        <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" class="dl-btn">DOWNLOAD 720P</a>
+                    </div>
+                </div>
+                <div class="movie-card">
                     <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" class="movie-img">
                     <div class="movie-info">
-                        <div class="meta-tag">IMDb: 7.5 | 192 Min | 2022</div>
+                        <div class="meta-tag">IMDb: 7.5 | 2022</div>
                         <h3>Avatar: Way of Water</h3>
-                        <p class="summary">Director: James Cameron. Jake Sully lives with his newfound family on the moon Pandora. Once a familiar threat returns, Jake must work with Neytiri to protect their home.</p>
+                        <p class="summary">Jake Sully lives with his newfound family on Pandora. Once a familiar threat returns, Jake must work with Neytiri to protect their home.</p>
                         <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI" class="dl-btn">DOWNLOAD 480P</a>
                     </div>
                 </div>
@@ -200,14 +209,13 @@
                 <h2>Upcoming Releases</h2>
                 <div class="line"></div>
             </div>
-
             <div class="collection-grid">
                 <div class="movie-card">
                     <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" class="movie-img">
                     <div class="movie-info">
                         <div class="meta-tag">IMDb: 7.4 | 2025 <span class="upcoming-label">COMING SOON</span></div>
                         <h3>Avatar: Fire and Ash</h3>
-                        <p class="summary">Director: James Cameron. The third chapter in the Avatar saga explores new regions of Pandora and introduces a more aggressive volcanic tribe known as the Ash People.</p>
+                        <p class="summary">The third chapter in the Avatar saga explores new regions of Pandora and introduces a more aggressive volcanic tribe known as the Ash People.</p>
                         <a href="#" class="dl-btn" style="background:#333; cursor:not-allowed;">UPCOMING 2025</a>
                     </div>
                 </div>
