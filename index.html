@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLICKS CINEMA | Avatar Collection</title>
+    <title>FLICKS CINEMA | Spider-Man</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,7 +14,7 @@
             --text-dim: #a0a0a0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -38,14 +38,17 @@
         .logo { font-size: 24px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
         .logo span { color: var(--accent-purple); }
 
-        nav ul { display: flex; list-style: none; gap: 40px; }
-        nav ul li { font-size: 14px; font-weight: 600; color: var(--text-dim); cursor: pointer; text-transform: uppercase; }
-        nav ul li:hover { color: #fff; }
+        nav ul { display: flex; list-style: none; gap: 35px; }
+        nav ul li a { 
+            font-size: 13px; font-weight: 600; color: var(--text-dim); 
+            text-decoration: none; text-transform: uppercase; transition: 0.3s;
+        }
+        nav ul li a:hover { color: #fff; }
 
         /* Hero Video Section */
         .hero {
             position: relative;
-            height: 90vh;
+            height: 100vh;
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -61,88 +64,87 @@
 
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.9) 100%),
+            background: linear-gradient(to right, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%),
                         linear-gradient(to top, var(--bg-dark) 0%, transparent 40%);
             z-index: 2;
         }
 
-        .hero-content { max-width: 900px; z-index: 3; position: relative; }
-        .hero-content h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; line-height: 1; text-transform: uppercase; }
-        .hero-content h1 span { display: block; font-size: 0.5em; letter-spacing: 5px; font-weight: 300; margin-top: 10px; }
+        .hero-content { max-width: 750px; z-index: 3; position: relative; }
+        .hero-content h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 900; line-height: 1.1; text-transform: uppercase; }
+        .hero-content h1 span { display: block; font-size: 0.55em; letter-spacing: 6px; font-weight: 300; margin-top: 5px; color: var(--accent-purple); }
+        
+        .hero-desc {
+            margin-top: 25px;
+            color: var(--text-dim);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 600px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
 
-        /* Collection Styling */
-        .container { padding: 60px 4%; }
-        .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
-        .section-header h2 { font-size: 24px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-meta {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Movie Sections */
+        .container { padding: 80px 4% 20px 4%; }
+        .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
+        .section-header h2 { font-size: 22px; text-transform: uppercase; letter-spacing: 2px; color: #fff; }
         .line { flex-grow: 1; height: 1px; background: rgba(255,255,255,0.1); }
 
         .collection-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .movie-card {
             background: var(--card-bg);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            transition: 0.3s ease;
+            transition: 0.4s ease;
             border: 1px solid rgba(255,255,255,0.05);
         }
 
         .movie-card:hover { transform: translateY(-10px); border-color: var(--accent-purple); }
-
-        .movie-img {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-        }
-
+        .movie-img { width: 100%; height: 450px; object-fit: cover; }
         .movie-info { padding: 25px; }
         .movie-info h3 { font-size: 20px; margin-bottom: 10px; }
-        .meta { font-size: 13px; color: var(--accent-purple); font-weight: bold; margin-bottom: 10px; }
-        .desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+        .meta-tag { font-size: 12px; color: var(--accent-purple); font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+        .summary { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
 
         .dl-btn {
-            display: inline-block;
-            width: 100%;
-            padding: 12px;
-            background: var(--accent-purple);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.3s;
+            display: inline-block; width: 100%; padding: 12px;
+            background: var(--accent-purple); color: white;
+            text-align: center; text-decoration: none; border-radius: 8px;
+            font-weight: bold; font-size: 14px; transition: 0.3s;
         }
-
         .dl-btn:hover { background: #9d4edd; }
 
-        .upcoming-badge {
-            background: #e50914;
-            color: white;
-            padding: 4px 10px;
-            font-size: 10px;
-            border-radius: 4px;
-            vertical-align: middle;
-            margin-left: 10px;
-            text-transform: uppercase;
+        .upcoming-label {
+            background: #e50914; color: white; padding: 4px 10px;
+            font-size: 11px; border-radius: 4px; margin-left: 10px; vertical-align: middle;
         }
+
     </style>
 </head>
-<body>
+<body id="home">
 
     <header>
         <div class="logo">FLICKS<span>CINEMA</span></div>
         <nav>
             <ul>
-                <li>HOME</li>
-                <li>MOVIES</li>
-                <li>DUBBED</li>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#movies">MOVIES</a></li>
+                <li><a href="#dubbed">DUBBED</a></li>
+                <li><a href="#upcoming">UPCOMING</a></li>
             </ul>
         </nav>
-        <div style="cursor:pointer">🔍</div>
+        <div style="cursor:pointer; font-size: 20px;">🔍</div>
     </header>
 
     <main>
@@ -151,25 +153,32 @@
                 <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
             </div>
             <div class="hero-overlay"></div>
+            
             <div class="hero-content">
+                <div class="hero-meta">MARVEL STUDIOS | 2H 22M | PG | JULY 31, 2026</div>
                 <h1>SPIDER - MAN<span>BRAND NEW DAY</span></h1>
+                <p class="hero-desc">
+                    Four years after the world forgot Peter Parker, he is a full-time Spider-Man in a city that no longer knows his name. 
+                    As his powers begin a surprising physical evolution, he must face a dangerous new threat that challenges everything 
+                    he has left to lose.
+                </p>
             </div>
         </section>
 
-        <section class="container">
+        <section class="container" id="movies">
+            <div id="dubbed"></div>
             <div class="section-header">
                 <h2>Avatar Collection</h2>
                 <div class="line"></div>
             </div>
 
             <div class="collection-grid">
-                
                 <div class="movie-card">
                     <img src="https://cinesubz.lk/wp-content/uploads/2026/03/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg" class="movie-img">
                     <div class="movie-info">
-                        <div class="meta">IMDb: 7.9 | BluRay | 2009</div>
+                        <div class="meta-tag">IMDb: 7.9 | 162 Min | 2009</div>
                         <h3>Avatar</h3>
-                        <p class="desc">Director: James Cameron. Country: UK, USA. A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.</p>
+                        <p class="summary">Director: James Cameron. A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following orders and protecting the world he feels is his home.</p>
                         <a href="https://bot6.sume321.online/Avatar%20(2009)%20English%20BluRay-%5BCineSubz.co%5D-720p.mp4?token=tddju8.UKK8YaHCvSLAQp-anmzm7e" class="dl-btn">DOWNLOAD 720P</a>
                     </div>
                 </div>
@@ -177,23 +186,31 @@
                 <div class="movie-card">
                     <img src="https://cinesubz.lk/wp-content/uploads/2026/03/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" class="movie-img">
                     <div class="movie-info">
-                        <div class="meta">IMDb: 7.5 | BluRay | 2022</div>
+                        <div class="meta-tag">IMDb: 7.5 | 192 Min | 2022</div>
                         <h3>Avatar: Way of Water</h3>
-                        <p class="desc">Director: James Cameron. Country: USA. Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started.</p>
+                        <p class="summary">Director: James Cameron. Jake Sully lives with his newfound family on the moon Pandora. Once a familiar threat returns, Jake must work with Neytiri to protect their home.</p>
                         <a href="https://bot6.sume321.online/Avatar%20The%20Way%20of%20Water%20(2022)%20English%20BluRay-%5BCineSubz.co%5D-480p.mp4?token=tddjpx.vxJB3n1fHAEKgc74i5W0iI" class="dl-btn">DOWNLOAD 480P</a>
                     </div>
                 </div>
+            </div>
+        </section>
 
+        <section class="container" id="upcoming">
+            <div class="section-header">
+                <h2>Upcoming Releases</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="collection-grid">
                 <div class="movie-card">
                     <img src="https://cinesubz.lk/wp-content/uploads/2026/03/Avatar-Fire-and-Ash-2025-WEB.jpg" class="movie-img">
                     <div class="movie-info">
-                        <div class="meta">IMDb: 7.4 | WEB | 2025 <span class="upcoming-badge">Upcoming</span></div>
+                        <div class="meta-tag">IMDb: 7.4 | 2025 <span class="upcoming-label">COMING SOON</span></div>
                         <h3>Avatar: Fire and Ash</h3>
-                        <p class="desc">Director: James Cameron. Country: USA. The third installment in the Avatar franchise continues the journey on Pandora, introducing the "Ash People" as a new threat/tribe.</p>
-                        <a href="#" class="dl-btn" style="background:#333; cursor:not-allowed;">COMING SOON</a>
+                        <p class="summary">Director: James Cameron. The third chapter in the Avatar saga explores new regions of Pandora and introduces a more aggressive volcanic tribe known as the Ash People.</p>
+                        <a href="#" class="dl-btn" style="background:#333; cursor:not-allowed;">UPCOMING 2025</a>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
