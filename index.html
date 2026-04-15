@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLICKS CINEMA | Premium Streaming</title>
+    <title>FLICKS CINEMA | Spider-Man</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --accent-purple: #7b2cbf;
-            --accent-purple-hover: #9d4edd;
             --bg-dark: #050505;
             --text-main: #ffffff;
             --text-dim: #a0a0a0;
-            --transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +19,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            overflow-x: hidden;
+            overflow: hidden; /* Clean look without scrolling */
         }
 
         header {
@@ -31,13 +29,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 4%;
+            padding: 30px 4%;
             background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
             z-index: 100;
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 900;
             letter-spacing: 2px;
             color: #fff;
@@ -49,11 +47,11 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 35px;
+            gap: 40px;
         }
 
         nav ul li {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--text-dim);
             cursor: pointer;
@@ -63,109 +61,89 @@
 
         nav ul li:hover { color: #fff; }
 
+        /* Fullscreen Video Background */
         .hero {
             position: relative;
-            height: 90vh;
+            height: 100vh;
             width: 100%;
+            overflow: hidden;
             display: flex;
             align-items: center;
             padding: 0 4%;
-            background: linear-gradient(to right, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.2) 50%, transparent 100%), 
-                        url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop') center/cover;
         }
 
-        .hero-content { max-width: 700px; z-index: 2; }
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .video-background iframe {
+            width: 100vw;
+            height: 56.25vw;
+            min-height: 100vh;
+            min-width: 177.77vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; /* User can't click the video to pause */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Stronger overlay to keep text sharp over video */
+            background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+        }
+
+        .hero-content { 
+            max-width: 900px; 
+            z-index: 3; 
+            position: relative;
+        }
 
         .badge-row {
             font-size: 14px;
-            margin-bottom: 10px;
-            color: var(--text-dim);
+            margin-bottom: 15px;
+            color: var(--accent-purple);
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-
-        .match { color: #46d369; font-weight: bold; }
 
         .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(3rem, 8vw, 5.5rem);
             font-weight: 900;
             line-height: 1;
-            margin-bottom: 25px;
             text-transform: uppercase;
+            letter-spacing: -2px;
         }
 
-        .btn-group { display: flex; gap: 15px; align-items: center; }
+        .hero-content h1 span {
+            display: block;
+            font-size: 0.5em;
+            color: var(--text-main);
+            margin-top: 10px;
+            letter-spacing: 5px;
+            font-weight: 300;
+        }
 
-        /* Modified Play Button */
-        .btn-play {
-            padding: 14px 50px;
-            background: var(--accent-purple);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 800;
-            font-size: 16px;
+        .search-icon {
+            font-size: 22px;
             cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
+            opacity: 0.7;
         }
 
-        .btn-play:hover {
-            background: var(--accent-purple-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(123, 44, 191, 0.4);
-        }
+        .search-icon:hover { opacity: 1; }
 
-        .btn-add {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            display: grid;
-            place-items: center;
-            transition: 0.3s;
-        }
-
-        .btn-add:hover { background: white; color: black; }
-
-        .movie-section {
-            padding: 0 4% 60px 4%;
-            margin-top: -100px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .section-title {
-            font-size: 18px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-            gap: 20px;
-        }
-
-        .movie-card {
-            border-radius: 12px;
-            overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
-            aspect-ratio: 2/3;
-            background: #1a1a1a;
-        }
-
-        .movie-card img { width: 100%; height: 100%; object-fit: cover; }
-
-        .movie-card:hover {
-            transform: scale(1.1) translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
-            z-index: 5;
-        }
     </style>
 </head>
 <body>
@@ -179,32 +157,21 @@
                 <li>DUBBED</li>
             </ul>
         </nav>
-        <div style="font-size: 20px; cursor: pointer;">🔍</div>
+        <div class="search-icon">🔍</div>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <div class="badge-row">
-                    A Disney Original Film | <span class="match">98% Match</span> | 2021
-                </div>
-                <h1>RAYA AND THE <br> LAST DRAGON</h1>
-                <div class="btn-group">
-                    <button class="btn-play">PLAY</button>
-                    <button class="btn-add">+</button>
-                </div>
+            <div class="video-background">
+                <iframe src="https://www.youtube.com/embed/8TZMtslA3UY?autoplay=1&mute=1&controls=0&loop=1&playlist=8TZMtslA3UY&rel=0&modestbranding=1" 
+                        frameborder="0" allow="autoplay; encrypted-media"></iframe>
             </div>
-        </section>
-
-        <section class="movie-section">
-            <h3 class="section-title">My List</h3>
-            <div class="movie-grid">
-                <div class="movie-card"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop" alt="Poster"></div>
-                <div class="movie-card"><img src="https://images.unsplash.com/photo-1542204111-97b5d847920e?q=80&w=1000&auto=format&fit=crop" alt="Poster"></div>
-                <div class="movie-card"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000&auto=format&fit=crop" alt="Poster"></div>
-                <div class="movie-card"><img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=1000&auto=format&fit=crop" alt="Poster"></div>
-                <div class="movie-card"><img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=1000&auto=format&fit=crop" alt="Poster"></div>
-                <div class="movie-card"><img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=1000&auto=format&fit=crop" alt="Poster"></div>
+            
+            <div class="hero-overlay"></div>
+            
+            <div class="hero-content">
+                <div class="badge-row">MARVEL STUDIOS PRESENTS</div>
+                <h1>SPIDER - MAN<span>BRAND NEW DAY</span></h1>
             </div>
         </section>
     </main>
