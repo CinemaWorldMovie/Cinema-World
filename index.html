@@ -7,10 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Base Palette: Black, White, Red */
         body { background-color: #000000; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* Hero Styling */
         .hero-gradient {
             background: linear-gradient(to right, #000000 30%, transparent 100%),
                         linear-gradient(to top, #000000 10%, transparent 40%);
@@ -21,7 +19,6 @@
             pointer-events: none; overflow: hidden;
         }
 
-        /* Scaled up for the "BIG" cinematic feel */
         .video-wrapper iframe { 
             position: absolute; top: 50%; left: 50%;
             width: 120vw; height: 120vh; 
@@ -33,7 +30,6 @@
         .page-fade { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* Form Styling with Red Focus */
         input, select, textarea { 
             background-color: #111111 !important; 
             border: 1px solid #333333 !important;
@@ -42,7 +38,6 @@
         }
         input:focus { border-color: #ff0000 !important; }
 
-        /* Custom Red Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 4px; }
@@ -57,9 +52,9 @@
             </h1>
             <div class="hidden md:flex space-x-6 text-gray-400 font-medium text-xs uppercase tracking-widest">
                 <button onclick="showView('home-view')" class="hover:text-[#ff0000] transition">Home</button>
-                <button onclick="navToSection('movies-section')" class="hover:text-[#ff0000] transition">Movies</button>
+                <button onclick="navToSection('pirates-section')" class="hover:text-[#ff0000] transition">Movies</button>
                 <button onclick="navToSection('upcoming-section')" class="hover:text-[#ff0000] transition">Upcoming</button>
-                <button onclick="navToSection('movies-section')" class="hover:text-[#ff0000] transition">Action</button>
+                <button onclick="navToSection('pirates-section')" class="hover:text-[#ff0000] transition">Action</button>
             </div>
         </div>
         <div class="flex items-center space-x-6 text-white">
@@ -86,20 +81,6 @@
             </div>
         </section>
 
-        <section id="movies-section" class="px-6 md:px-16 -mt-20 relative z-30 pb-16">
-            <h3 class="text-xl font-bold mb-8 flex items-center uppercase tracking-widest"><span class="text-[#ff0000] mr-3">|</span> Action & Adventure</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div onclick="openDetails('black-pearl')" class="bg-[#111111] border border-[#333333] hover:border-[#ff0000] transition-all cursor-pointer group">
-                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
-                    <div class="p-5 font-bold text-lg">The Curse of the Black Pearl</div>
-                </div>
-                <div onclick="openDetails('dead-mans-chest')" class="bg-[#111111] border border-[#333333] hover:border-[#ff0000] transition-all cursor-pointer group">
-                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
-                    <div class="p-5 font-bold text-lg">Dead Man's Chest</div>
-                </div>
-            </div>
-        </section>
-
         <section id="upcoming-section" class="px-6 md:px-16 py-20 relative z-30 border-t border-[#222] bg-[#050505]">
             <h3 class="text-xl font-bold mb-8 flex items-center uppercase tracking-widest"><span class="text-[#ff0000] mr-3">|</span> Upcoming Releases</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -113,6 +94,20 @@
                     <div class="p-4 text-center">
                         <h4 class="font-bold text-sm">Spider-Man: Brand New Day</h4>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pirates-section" class="px-6 md:px-16 py-20 relative z-30 border-t border-[#222] bg-[#000000]">
+            <h3 class="text-xl font-bold mb-8 flex items-center uppercase tracking-widest"><span class="text-[#ff0000] mr-3">|</span> Pirates Collection</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div onclick="openDetails('black-pearl')" class="bg-[#111111] border border-[#333333] hover:border-[#ff0000] transition-all cursor-pointer group">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-5 font-bold text-lg">The Curse of the Black Pearl</div>
+                </div>
+                <div onclick="openDetails('dead-mans-chest')" class="bg-[#111111] border border-[#333333] hover:border-[#ff0000] transition-all cursor-pointer group">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-5 font-bold text-lg">Dead Man's Chest</div>
                 </div>
             </div>
         </section>
@@ -179,7 +174,8 @@
                 showView('home-view');
             }
             setTimeout(() => {
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                const element = document.getElementById(sectionId);
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
             }, 100);
         }
 
