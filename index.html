@@ -7,92 +7,178 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { background-color: #0f171e; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
         .hero-gradient {
-            background: linear-gradient(to right, #0f171e 30%, transparent 100%),
-                        linear-gradient(to top, #0f171e 10%, transparent 40%);
+            background: linear-gradient(to right, #0f171e 35%, transparent 100%),
+                        linear-gradient(to top, #0f171e 5%, transparent 30%);
         }
+        /* Smooth transitions between views */
+        .page-fade { transition: opacity 0.3s ease-in-out; }
+        .hidden { display: none; }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
-    <nav class="flex items-center justify-between px-10 py-4 bg-[#0f171e]/90 sticky top-0 z-50">
+    <nav class="flex items-center justify-between px-6 md:px-10 py-4 bg-[#0f171e] sticky top-0 z-50 border-b border-gray-800">
         <div class="flex items-center space-x-8">
-            <h1 class="text-2xl font-bold tracking-tighter text-white">FLICKS <span class="text-blue-400">CINEMA</span></h1>
+            <h1 class="text-2xl font-bold tracking-tighter text-white cursor-pointer" onclick="showHome()">
+                FLICKS <span class="text-blue-400">CINEMA</span>
+            </h1>
             <div class="hidden md:flex space-x-6 text-gray-300 font-medium text-sm">
-                <a href="#" class="text-white border-b-2 border-white pb-1">Home</a>
-                <a href="#" class="hover:text-white transition">Movies</a>
-                <a href="#" class="hover:text-white transition">TV shows</a>
-                <a href="#" class="hover:text-white transition">Sports</a>
-                <a href="#" class="hover:text-white transition">Live TV</a>
+                <button onclick="showHome()" class="hover:text-white">Home</button>
+                <button class="hover:text-white">Movies</button>
+                <button class="hover:text-white">TV Shows</button>
             </div>
         </div>
         <div class="flex items-center space-x-6 text-gray-300">
-            <i class="fas fa-search cursor-pointer hover:text-white"></i>
-            <i class="fas fa-th-large cursor-pointer hover:text-white"></i>
-            <i class="fas fa-user-circle text-2xl cursor-pointer hover:text-white"></i>
+            <i class="fas fa-search cursor-pointer"></i>
+            <i class="fas fa-user-circle text-2xl cursor-pointer"></i>
         </div>
     </nav>
 
-    <section class="relative h-[85vh] w-full flex items-center">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
-                 class="w-full h-full object-cover object-top" alt="Hero Background">
-            <div class="absolute inset-0 hero-gradient"></div>
-        </div>
-
-        <div class="relative z-10 px-16 max-w-2xl">
-            <p class="text-blue-400 font-bold mb-2 tracking-widest text-xs uppercase">Original Series</p>
-            <h2 class="text-5xl font-black italic tracking-tighter mb-4">THE RINGS OF POWER</h2>
-            <p class="text-lg text-gray-200 mb-2 font-semibold">New Season</p>
-            <p class="text-gray-400 text-md mb-8 leading-relaxed">
-                Sauron has returned. Cast out by Galadriel, the Dark Lord must rely on his own cunning to forge the Rings of Power.
-            </p>
-            
-            <div class="flex space-x-4">
-                <button class="bg-white text-black px-8 py-3 rounded-md font-bold flex items-center hover:bg-gray-200 transition">
-                    <i class="fas fa-play mr-3"></i> Play S2 E1
-                </button>
-                <button class="bg-gray-500/40 text-white px-8 py-3 rounded-md font-bold flex items-center hover:bg-gray-500/60 transition backdrop-blur-md">
-                    <i class="fas fa-info-circle mr-3"></i> More details
+    <div id="home-view" class="page-fade">
+        <section class="relative h-[80vh] w-full flex items-center">
+            <div class="absolute inset-0 z-0">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" 
+                     class="w-full h-full object-cover object-center" alt="Hero">
+                <div class="absolute inset-0 hero-gradient"></div>
+            </div>
+            <div class="relative z-10 px-6 md:px-16 max-w-3xl">
+                <h2 class="text-4xl md:text-6xl font-black italic tracking-tighter mb-2">PIRATES OF THE CARIBBEAN</h2>
+                <p class="text-lg md:text-xl text-gray-300 mb-8">The Curse of the Black Pearl</p>
+                <button onclick="openDetails('black-pearl')" class="bg-white text-black px-10 py-3 rounded-md font-bold hover:bg-gray-200 transition">
+                    Watch Now
                 </button>
             </div>
-            <p class="mt-6 text-sm text-gray-400 flex items-center">
-                <i class="fas fa-check-circle text-blue-400 mr-2"></i> Included with Flicks Plus
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <section class="px-16 -mt-20 relative z-20 pb-20">
-        <h3 class="text-xl font-bold mb-4">Flicks movies</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            <div class="group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80" 
-                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
-                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">The Idea of You</p>
-            </div>
-            <div class="group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=400&q=80" 
-                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
-                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">Road House</p>
-            </div>
-            <div class="group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" 
-                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
-                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">My Fault</p>
-            </div>
-            <div class="group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?auto=format&fit=crop&w=400&q=80" 
-                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
-                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">Jackpot!</p>
-            </div>
-            <div class="group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=400&q=80" 
-                     class="rounded-lg border-2 border-transparent group-hover:border-white transition-all duration-300 transform group-hover:scale-105 shadow-xl">
-                <p class="mt-2 text-sm font-semibold text-gray-300 group-hover:text-white">The Boys</p>
-            </div>
-        </div>
-    </section>
+        <section class="px-6 md:px-16 -mt-16 relative z-20 mb-20">
+            <h3 class="text-xl font-bold mb-6 flex items-center text-gray-200">
+                <span class="text-blue-400 mr-2">|</span> Pirates of the Caribbean Collection
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div onclick="openDetails('black-pearl')" class="bg-[#1a242f] rounded-lg overflow-hidden group border border-gray-800 hover:border-blue-400 transition-all cursor-pointer">
+                    <div class="relative aspect-video">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold">The Curse of the Black Pearl</h4>
+                        <p class="text-xs text-gray-400 mt-1">2003 | Adventure | Fantasy</p>
+                    </div>
+                </div>
 
+                <div onclick="openDetails('dead-mans-chest')" class="bg-[#1a242f] rounded-lg overflow-hidden group border border-gray-800 hover:border-blue-400 transition-all cursor-pointer">
+                    <div class="relative aspect-video">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold">Dead Man's Chest</h4>
+                        <p class="text-xs text-gray-400 mt-1">2006 | Adventure | Action</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="details-view" class="page-fade hidden">
+        <div class="px-6 py-4">
+            <button onclick="showHome()" class="text-blue-400 font-bold hover:text-white transition">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Home
+            </button>
+        </div>
+
+        <main class="relative min-h-screen">
+            <div class="absolute inset-0 z-0 h-[70vh]">
+                <img id="det-bg" src="" class="w-full h-full object-cover opacity-40">
+                <div class="absolute inset-0 detail-gradient"></div>
+            </div>
+
+            <div class="relative z-10 px-6 md:px-20 pt-16 max-w-6xl">
+                <h1 id="det-title" class="text-5xl md:text-7xl font-black italic tracking-tighter mb-2"></h1>
+                <p id="det-subtitle" class="text-2xl text-blue-400 mb-8 font-semibold"></p>
+                
+                <p id="det-desc" class="text-gray-300 text-lg leading-relaxed max-w-3xl mb-10 border-l-4 border-blue-500 pl-6"></p>
+
+                <div class="flex flex-wrap gap-4 mb-16">
+                    <a id="det-link-1080" href="#" class="bg-white text-black px-8 py-3 rounded-md font-bold hover:bg-gray-200">Download Link 1 (1080p)</a>
+                    <a id="det-link-720" href="#" class="bg-gray-700 text-white px-8 py-3 rounded-md font-bold hover:bg-gray-600">Download Link 2 (720p)</a>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 border-t border-gray-800 pt-10 pb-20">
+                    <div>
+                        <h3 class="text-blue-400 uppercase tracking-widest text-sm font-bold mb-6">The Crew</h3>
+                        <div id="det-cast" class="grid grid-cols-2 gap-y-3 text-gray-300"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-blue-400 uppercase tracking-widest text-sm font-bold mb-6">Technical Specifications</h3>
+                        <div id="det-specs" class="space-y-3 text-sm text-gray-400"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const movieDb = {
+            'black-pearl': {
+                title: "PIRATES OF THE CARIBBEAN",
+                subtitle: "The Curse of the Black Pearl (2003)",
+                bg: "https://blogger.googleusercontent.com/img/a/AVvXsEgXykIwpy0P1YDeOOFBS8N8mUrQvjToqEWbnsoHcvpgNIvMQgojspwu8u98WvV97LRCya0o8ExpvHe6DtBntXdx1J0yuLhigLhECsLxAV83y0dnqZlQxE4pAH154uQ5gI-wN9r30WBaf4LqTujERM0O-sjQ5FFdVpPKD0NoDpBpYwzHtXD5FZ93S_1n5bQ",
+                desc: "In the 18th century Caribbean, blacksmith Will Turner teams up with eccentric pirate Captain Jack Sparrow to save Elizabeth Swann from the cursed crew of the Black Pearl. The crew, led by the treacherous Captain Barbossa, are under an ancient Aztec curse.",
+                cast: ["Johnny Depp", "Orlando Bloom", "Keira Knightley", "Geoffrey Rush"],
+                specs: {"Quality": "1080p Blu-ray", "Audio": "Dolby Digital 5.1", "Runtime": "143 minutes", "IMDb": "7.8/10"},
+                l1080: "https://pixeldrain.com/u/AyChGtcW",
+                l720: "https://pixeldrain.com/u/AyChGtcW"
+            },
+            'dead-mans-chest': {
+                title: "PIRATES OF THE CARIBBEAN",
+                subtitle: "Dead Man's Chest (2006)",
+                bg: "https://blogger.googleusercontent.com/img/a/AVvXsEgL7liGAoVrXZenNLsx0oSmWSbjh1w-qCRWEVkzLhaVBml_MeOspLMljZw9Nh6lGe5IxneYz5NnamZIr99xqR5m-jdlGXJNg7rjfV77bOJjy5VK0FHHHrbWL3jZCXPf0KFd-zFag4q1jw7cchCq1CJI0aG8V8SgUDzoC7moV07TwRF33jkklgy4ytvQ7rc",
+                desc: "Captain Jack Sparrow finds himself in debt to the legendary Davy Jones, captain of the ghostly Flying Dutchman. With a cursed chest at stake and Will Turner and Elizabeth Swann caught in the middle, this adventure takes pirates to new depths of danger.",
+                cast: ["Johnny Depp", "Orlando Bloom", "Keira Knightley", "Bill Nighy"],
+                specs: {"Quality": "1080p HD", "Audio": "5.1 Surround", "Runtime": "151 minutes", "Visuals": "Academy Award Winner"},
+                l1080: "https://pixeldrain.com/u/rRsAELaH",
+                l720: "https://pixeldrain.com/u/rRsAELaH"
+            }
+        };
+
+        function showHome() {
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('details-view').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openDetails(id) {
+            const data = movieDb[id];
+            if (!data) return;
+
+            // Update Details View
+            document.getElementById('det-title').innerText = data.title;
+            document.getElementById('det-subtitle').innerText = data.subtitle;
+            document.getElementById('det-bg').src = data.bg;
+            document.getElementById('det-desc').innerText = data.desc;
+            document.getElementById('det-link-1080').href = data.l1080;
+            document.getElementById('det-link-720').href = data.l720;
+
+            // Update Cast
+            const castDiv = document.getElementById('det-cast');
+            castDiv.innerHTML = "";
+            data.cast.forEach(c => {
+                castDiv.innerHTML += `<p class="border-b border-gray-800 pb-2">${c}</p>`;
+            });
+
+            // Update Specs
+            const specDiv = document.getElementById('det-specs');
+            specDiv.innerHTML = "";
+            for (const [key, val] of Object.entries(data.specs)) {
+                specDiv.innerHTML += `<div class="flex justify-between border-b border-gray-800 pb-1"><span>${key}</span><span class="text-white">${val}</span></div>`;
+            }
+
+            // Swap Views
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('details-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
